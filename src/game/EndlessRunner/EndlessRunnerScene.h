@@ -5,6 +5,9 @@
 
 class EndlessRunnerScene : public Scene
 {
+private:
+	int couldown = 0;
+
 public:
 	EndlessRunnerScene();
 

@@ -21,7 +21,7 @@ void Vector2f::SetY(float y)
 
 Vector2f Vector2f::Normalise()
 {
-    float d = sqrt(pow(_x, 2) + pow(_y, 2));
+    float d = sqrt(_x * _x + _y * _y);
 
     if (d == 0)
         return Vector2f(0, 0);

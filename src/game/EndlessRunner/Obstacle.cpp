@@ -16,6 +16,12 @@ void Obstacle::InitEntity(Window* window, std::string path, float deltaTime, Vec
 
 void Obstacle::Update()
 {
+	if (GetPos().GetX() <= 0.f)
+	{
+		SetPos({ -30.f, GetPos().GetY() });
+		return;
+	}
+
 	Position Pos = Position({ 0.f, 0.f });
 
 	Pos.SetPos({ -(GetPos().GetX() + 300.f * _deltaTime), 0.f });
@@ -26,9 +32,6 @@ void Obstacle::Update()
 
 void Obstacle::Draw(Window* window)
 {
-	SDL_Color color = { 255, 255, 255, 255 };
-	SDL_FRect rect = { GetPos().GetX(), GetPos().GetY(), width, height };
-	SDL_RenderRect(window->GetRenderer(), &rect);
-
-	_sprite->Draw(window);
+	if (_sprite != nullptr)
+		_sprite->Draw(window);
 }
