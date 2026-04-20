@@ -1,9 +1,12 @@
 #include "moteur2d/Header_Files/RunningGame.h"
 
-void RunningGame::Init()
+void RunningGame::ChooseMainScene()
 {
 	_manager->ChooseScene();
+}
 
+void RunningGame::Init()
+{
 	_window.CreateOurWindow("MasterClass", WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	_manager->GetPrincipalScene()->InitScene(&_window);

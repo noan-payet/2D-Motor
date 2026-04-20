@@ -10,10 +10,6 @@
 #include "lib2d/Header_Files/Window.h"
 #include "lib2d/Header_Files/Input.h"
 
-#include "game/Player.h"
-#include "game/SceneBall.h"
-#include "game/ScenePong.h"
-
 #include <thread>
 
 class RunningGame
@@ -29,6 +25,8 @@ private:
 public:
 	RunningGame():
 	_manager(new SceneManager()){}
+
+	void ChooseMainScene();
 
 	void Init();
 	void Loop();

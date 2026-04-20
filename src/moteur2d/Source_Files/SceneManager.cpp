@@ -18,7 +18,9 @@ void SceneManager::ChooseScene()
 	std::cout << "Dans cette scene, des balle rebondissent sur les bords de la fenetre.\n";
 	std::cout << "Pour rajouter une balle, appuyez sur la touche B.\n\n";
 
-	std::cout << "Choisis une scene a jouer : (1-2)\n";
+	std::cout << "3 : EndlessRunner\n";
+
+	std::cout << "Choisis une scene a jouer : (1-3)\n";
 	int choice;
 	std::cin >> choice;
 
