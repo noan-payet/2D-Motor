@@ -12,6 +12,7 @@ private:
 	Sprite* _sprite = nullptr;
 
 	float _deltaTime = 0.f;
+	float jumpCouldown = 0.f;
 
 public:
 	Runner() {};

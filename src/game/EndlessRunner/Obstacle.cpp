@@ -16,7 +16,7 @@ void Obstacle::InitEntity(Window* window, std::string path, float deltaTime, Vec
 
 void Obstacle::Update()
 {
-	if (GetPos().GetX() <= 0.f)
+	if (GetPos().GetX() <= 10.f)
 	{
 		SetPos({ -30.f, GetPos().GetY() });
 		return;

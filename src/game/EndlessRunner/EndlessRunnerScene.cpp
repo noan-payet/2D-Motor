@@ -17,7 +17,7 @@ void EndlessRunnerScene::InitScene(Window* window)
 		CreateEntity<Ground>()->InitEntity(window, "res/game/SonicGround.png", TARGET_DELTA_TIME, Vector2f({ groundCount * i, 400.f }));
 	}
 
-	CreateEntity<Obstacle>()->InitEntity(window, "res/game/Taxes.png", TARGET_DELTA_TIME, Vector2f({ 720.f, 300.f }));
+	//CreateEntity<Obstacle>()->InitEntity(window, "res/game/Taxes.png", TARGET_DELTA_TIME, Vector2f({ 720.f, 300.f }));
 
 	CreateEntity<Runner>()->InitEntity(window, "res/game/Runner.png", TARGET_DELTA_TIME, Vector2f({ 100.f, 300.f }));
 }
@@ -31,6 +31,7 @@ void EndlessRunnerScene::UpdateScene(Window* window)
 			if (GetEntity<Runner>()->IsCollding(o))
 			{
 				GetEntity<Runner>()->SetGravity(false);
+				GetEntity<Runner>()->SetPos({ GetEntity<Runner>()->GetPos().GetX(), 290.f });
 			}
 		}
 	}
@@ -47,24 +48,22 @@ void EndlessRunnerScene::UpdateScene(Window* window)
 	}*/
 	int spawnObstacle = rand() % 720 + 720;
 
-	if (spawnObstacle > 700 && couldown == 0)
-		couldown += 100;
+	if (spawnObstacle > 700)
+		couldown += 10;
 
 	if (couldown >= spawnObstacle)
 	{
 		couldown = 0;
-		CreateEntity<Obstacle>()->InitEntity(window, "res/game/Taxes.png", TARGET_DELTA_TIME, Vector2f({ 720.f, 300.f }));
+		CreateEntity<Obstacle>()->InitEntity(window, "res/game/Taxes.png", TARGET_DELTA_TIME, Vector2f({ 1280.f, 300.f }));
 	}
-	
-	if (GetEntities<Obstacle>().size() > 0)
+
+	for (auto& o : GetEntities<Obstacle>())
 	{
-		for (auto& o : GetEntities<Obstacle>())
-		{
-			if (GetEntity<Runner>()->IsCollding(o))
-			{
-				std::cout << "Game Over!" << std::endl;
-				exit(0);
-			}
+		if (GetEntity<Runner>()->IsCollding(o))
+		{ 
+			std::cout << '\n' << '\n';
+			std::cout << "Game Over!\n" << std::endl;
+			exit(0);
 		}
 	}
 }

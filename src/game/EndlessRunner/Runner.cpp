@@ -23,18 +23,24 @@ void Runner::Update()
 
 	Fall(_playerPos);
 
-	if (Input::getInstance().isKeyHeld(SDLK_Z) || Input::getInstance().isKeyHeld(SDLK_UP))
+	if (Input::getInstance().isKeyHeld(SDLK_Z) || Input::getInstance().isKeyHeld(SDLK_UP) && jumpCouldown < 2.f)
 	{
 		_playerPos.SetPos({ _playerPos.GetPos().GetX(), -(GetPos().GetY() - 300.f * _deltaTime) });
 		_gravity = true;
+		jumpCouldown += 0.1f;
 	}
-	if (Input::getInstance().isKeyHeld(SDLK_S) || Input::getInstance().isKeyHeld(SDLK_DOWN))
+	if (Input::getInstance().isKeyHeld(SDLK_S) || Input::getInstance().isKeyHeld(SDLK_DOWN) && _gravity == true)
 	{
 		_playerPos.SetPos({ _playerPos.GetPos().GetX(), GetPos().GetY() + 300.f * _deltaTime });
 	}
 
+	if (_gravity == false)
+		jumpCouldown = 0.f;
+
 	SetPos(GetPos().operator+(_playerPos.GetPos().Normalise().operator*(10)));
 	_sprite->SetPos(GetPos());
+
+	std::cout << "Player position: (" << GetPos().GetX() << ", " << GetPos().GetY() << ")" << std::endl;
 }
 
 void Runner::Draw(Window* window)
