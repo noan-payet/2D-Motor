@@ -1,6 +1,8 @@
 #include "EndlessRunnerScene.h"
 #include "lib2d/Header_Files/Window.h"
 
+#include "moteur2d/Header_Files/RunningGame.h"
+
 #include "game/EndlessRunner/Runner.h"
 #include "game/EndlessRunner/Ground.h"
 #include "game/EndlessRunner/Obstacle.h"
@@ -77,7 +79,9 @@ void EndlessRunnerScene::UpdateScene(Window* window)
 			std::cout << '\n' << '\n';
 			std::cout << "Game Over!" << std::endl;
 			std::cout << "Your score: " << score << std::endl;
-			exit(0);
+			
+			RunningGame game;
+			game.ChangeScene();
 		}
 	}
 }
