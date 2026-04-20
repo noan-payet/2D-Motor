@@ -8,6 +8,8 @@ class EndlessRunnerScene : public Scene
 private:
 	int couldown = 0;
 
+	int score;
+
 public:
 	EndlessRunnerScene();
 

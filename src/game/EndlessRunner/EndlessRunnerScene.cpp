@@ -24,6 +24,8 @@ void EndlessRunnerScene::InitScene(Window* window)
 
 void EndlessRunnerScene::UpdateScene(Window* window)
 {
+	std::cout << "Score: " << score << std::endl;
+
 	if (GetEntities<Ground>().size() > 0)
 	{
 		for (auto& o : GetEntities<Ground>())
@@ -46,6 +48,17 @@ void EndlessRunnerScene::UpdateScene(Window* window)
 			obstacles.erase(obstacles.begin() + idx);
 		}
 	}*/
+
+	for (auto& o : GetEntities<Obstacle>())
+	{
+		float distance = o->GetPos().GetX() - GetEntity<Runner>()->GetPos().GetX();
+
+		if (distance <= 0.5f && distance >= -0.5f)
+		{
+			score += 1;
+		}
+	}
+
 	int spawnObstacle = rand() % 720 + 720;
 
 	if (spawnObstacle > 700)
@@ -62,7 +75,8 @@ void EndlessRunnerScene::UpdateScene(Window* window)
 		if (GetEntity<Runner>()->IsCollding(o))
 		{ 
 			std::cout << '\n' << '\n';
-			std::cout << "Game Over!\n" << std::endl;
+			std::cout << "Game Over!" << std::endl;
+			std::cout << "Your score: " << score << std::endl;
 			exit(0);
 		}
 	}

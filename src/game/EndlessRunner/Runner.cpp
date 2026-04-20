@@ -23,24 +23,30 @@ void Runner::Update()
 
 	Fall(_playerPos);
 
-	if (Input::getInstance().isKeyHeld(SDLK_Z) || Input::getInstance().isKeyHeld(SDLK_UP) && jumpCouldown < 2.f)
-	{
-		_playerPos.SetPos({ _playerPos.GetPos().GetX(), -(GetPos().GetY() - 300.f * _deltaTime) });
-		_gravity = true;
+	if (_gravity == true)
 		jumpCouldown += 0.1f;
+	else
+		jumpCouldown = 0.f;
+
+	if (jumpCouldown < 3.f)
+	{
+		if (Input::getInstance().isKeyHeld(SDLK_Z) || Input::getInstance().isKeyHeld(SDLK_UP))
+		{
+			_playerPos.SetPos({ _playerPos.GetPos().GetX(), -(GetPos().GetY() - 300.f * _deltaTime) });
+		}
 	}
 	if (Input::getInstance().isKeyHeld(SDLK_S) || Input::getInstance().isKeyHeld(SDLK_DOWN) && _gravity == true)
 	{
 		_playerPos.SetPos({ _playerPos.GetPos().GetX(), GetPos().GetY() + 300.f * _deltaTime });
 	}
 
-	if (_gravity == false)
-		jumpCouldown = 0.f;
+	_gravity = true;
 
 	SetPos(GetPos().operator+(_playerPos.GetPos().Normalise().operator*(10)));
 	_sprite->SetPos(GetPos());
 
-	std::cout << "Player position: (" << GetPos().GetX() << ", " << GetPos().GetY() << ")" << std::endl;
+	//std::cout << "Jump cooldown: " << jumpCouldown << std::endl;
+	//std::cout << "Player position: (" << GetPos().GetX() << ", " << GetPos().GetY() << ")" << std::endl;
 }
 
 void Runner::Draw(Window* window)
@@ -55,7 +61,7 @@ bool Runner::IsCollding(Entity* otherEntity)
 		GetPos().GetY() + height - 10 >= otherEntity->GetPos().GetY() &&                   // r1 top edge past r2 bottom
 		GetPos().GetY() <= otherEntity->GetPos().GetY() + otherEntity->GetHeight())        // r1 bottom edge past r2 top
 	{      
-		std::cout << "Collision detected!" << std::endl;
+		//std::cout << "Collision detected!" << std::endl;
 		return true;
 	}
 
