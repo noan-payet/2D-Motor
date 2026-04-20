@@ -27,6 +27,8 @@ public:
 	bool isOpen();
 	bool isRender();
 
+	SDL_Renderer* GetRenderer() const { return _renderer; }
+
 	friend class Sprite;
 	friend class Entity;
 

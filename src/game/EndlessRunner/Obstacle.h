@@ -1,11 +1,11 @@
-#ifndef _H__GROUND
-#define _H__GROUND
+#ifndef _H__OBSTACLE
+#define _H__OBSTACLE
 
 #include "lib2d/Header_Files/Sprite.h"
 
 #include "moteur2d/Header_Files/Entity.h"
 
-class Ground : public Entity
+class Obstacle : public Entity
 {
 private:
 	Sprite* _sprite = nullptr;
@@ -13,8 +13,8 @@ private:
 	float _deltaTime = 0.f;
 
 public:
-	Ground() {};
-	~Ground() {};
+	Obstacle() {};
+	~Obstacle() {};
 
 	void InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos) override;
 
@@ -23,4 +23,4 @@ public:
 	void Draw(Window* window) override;
 };
 
-#endif // !_H__GROUND
+#endif // !_H__OBSTACLE
