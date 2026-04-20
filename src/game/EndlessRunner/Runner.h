@@ -10,7 +10,6 @@ class Runner : public Entity
 {
 private:
 	Sprite* _sprite = nullptr;
-	float width = 0, height = 0.f;
 
 	float _deltaTime = 0.f;
 
@@ -23,6 +22,15 @@ public:
 	void Update() override;
 
 	void Draw(Window* window) override;
+
+private:
+	bool _gravity = true;
+
+public:
+	void Fall(Position &player);
+
+	bool IsCollding(Entity* otherEntity);
+	bool SetGravity(bool gravity) { return _gravity = gravity; }
 };
 
 #endif // !_H__RUNNER

@@ -3,8 +3,13 @@
 
 #include "moteur2d/Header_Files/Scene.h"
 
+class Runner;
+
 class EndlessRunnerScene : public Scene
 {
+private:
+	Runner* _runner = nullptr;
+
 public:
 	EndlessRunnerScene();
 
