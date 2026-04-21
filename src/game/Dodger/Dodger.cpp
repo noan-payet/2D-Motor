@@ -21,13 +21,12 @@ void Dodger::InitEntity(Window* window, std::string path, float deltaTime, Vecto
 
 void Dodger::Update()
 {
-	_spriteLife->SetPos(GetHitbox(0.75f, 1.f));
-
 	Input& input = Input::getInstance();
+	input.HideMouseCursor();
+	SetHitbox(input.GetMousePosition(), 1.f, 1.f);
 
-	SetPos(input.GetMousePosition());
-	SetHitbox(GetPos());
-	_sprite->SetPos(GetPos());
+	_sprite->SetPos(GetHitbox());
+	_spriteLife->SetPos(GetHitbox(1.f, 1.f));
 }
 
 void Dodger::Draw(Window* window)

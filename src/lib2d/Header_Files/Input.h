@@ -27,6 +27,8 @@ public:
 	bool isKeyUp(SDL_Keycode key);
 
 	Vector2f GetMousePosition() const;
+	void ShowMouseCursor() { SDL_ShowCursor(); }
+	void HideMouseCursor() { SDL_HideCursor(); }
 
 	bool Update();
 };
