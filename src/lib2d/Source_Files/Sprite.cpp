@@ -1,8 +1,8 @@
 #include "Header_Files/Sprite.h"
 #include "Header_Files/Window.h"
 
-Sprite::Sprite(std::string path, Position position)
-	: _path(path), Position(position) 
+Sprite::Sprite(std::string path, Position position, bool isSheet)
+	: _path(path), Position(position), isSpriteSheet(isSheet)
 {
 	_width = 0.f;
 	_height = 0.f;
@@ -53,7 +53,7 @@ void Sprite::Draw(Window* window)
 	SDL_FRect rectShow = { GetPos().GetX(), GetPos().GetY(), _newWidth, _newHeight };
 	SDL_FRect rect = { newSizeX, newSizeY, _newWidth, _newHeight };
 
-	if (_width == _newWidth && _height == _newHeight && newSizeX == 0 && newSizeY == 0)
+	if (isSpriteSheet == false)
 		SDL_RenderTexture(window->_renderer, _texture, NULL, &rectShow);
 	else
 		SDL_RenderTexture(window->_renderer, _texture, &rect, &rectShow);
@@ -61,16 +61,13 @@ void Sprite::Draw(Window* window)
 
 void Sprite::Resize(float w, float h)
 {
-	float factorWidth = w / _width;
-	float factorHeight = h / _height;
+	float factorWidth = w / _newWidth;
+	float factorHeight = h / _newHeight;
 
 	float factorMin = std::min(factorWidth, factorHeight);
 
-	_width *= factorMin;
-	_height *= factorMin;
-
-	_newWidth = _width;
-	_newHeight = _height;
+	_newWidth *= factorMin;
+	_newHeight *= factorMin;
 }
 
 Vector2f Sprite::GetHitbox(float anchorX, float anchorY)

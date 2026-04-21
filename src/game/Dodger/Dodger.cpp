@@ -10,7 +10,7 @@ void Dodger::InitEntity(Window* window, std::string path, float deltaTime, Vecto
 	width = _sprite->GetWidth();
 	height = _sprite->GetHeight();
 
-	_spriteLife = new Sprite("res/game/Life.png", GetHitbox(0.75f, 1.f));
+	_spriteLife = new Sprite("res/game/Life.png", GetHitbox(0.75f, 1.f), true);
 	_spriteLife->loadSprite(window);
 	_spriteLife->Resize(_spriteLife->GetWidth() * 0.25f, _spriteLife->GetHeight() * 0.25f);
 
@@ -25,7 +25,8 @@ void Dodger::Update()
 
 	Input& input = Input::getInstance();
 
-	SetHitbox(input.GetMousePosition());
+	SetPos(input.GetMousePosition());
+	SetHitbox(GetPos());
 	_sprite->SetPos(GetPos());
 }
 
@@ -37,5 +38,6 @@ void Dodger::Draw(Window* window)
 
 void Dodger::LoseLife()
 {
-	++life; _spriteLife->SetWidthInt(_spriteLife->GetOriginalWidth() * life / 3);
+	++life; 
+	_spriteLife->SetSizeX(_spriteLife->GetOriginalWidth() * life / 4);
 }

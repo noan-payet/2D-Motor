@@ -13,7 +13,7 @@ private:
 
 	float _deltaTime = 0.f;
 
-	int life = 0;
+	int life = 1;
 	int newLife = 0;
 
 public:

@@ -15,8 +15,10 @@ private:
 
 	int newSizeX, newSizeY;
 
+	bool isSpriteSheet;
+
 public:
-	Sprite(std::string, Position position);
+	Sprite(std::string, Position position, bool isSpriteSheet = false);
 
 	void Draw(Window* window) override;
 
@@ -31,8 +33,8 @@ public:
 	void SetWidth(float width);
 	void SetHeight(float height);
 
-	void SetWidthInt(int x) { newSizeX = x; }
-	void SetHeightInt(int y) { newSizeY = y; }
+	void SetSizeX(int x) { newSizeX = x; }
+	void SetSizeY(int y) { newSizeY = y; }
 
 	void Resize(float w, float h);
 

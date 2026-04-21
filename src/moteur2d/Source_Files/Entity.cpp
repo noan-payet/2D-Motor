@@ -40,10 +40,10 @@ void Entity::SetHitbox(Vector2f newPos, float anchorX, float anchorY)
 
 bool Entity::IsCollding(Entity* otherEntity)
 {
-	if (GetPos().GetX() + width >= otherEntity->GetPos().GetX() &&                         // r1 right edge past r2 left
-		GetPos().GetX() <= otherEntity->GetPos().GetX() + otherEntity->GetWidth() &&       // r1 left edge past r2 right
-		GetPos().GetY() + height - 10 >= otherEntity->GetPos().GetY() &&                   // r1 top edge past r2 bottom
-		GetPos().GetY() <= otherEntity->GetPos().GetY() + otherEntity->GetHeight())        // r1 bottom edge past r2 top
+	if (GetHitbox(1.f).GetX() >= otherEntity->GetHitbox(0.f).GetX() &&                         // r1 right edge past r2 left
+		GetHitbox(0.f).GetX() <= otherEntity->GetHitbox(1.f).GetX() &&       // r1 left edge past r2 right
+		GetHitbox(0.5f, 1.f).GetY() >= otherEntity->GetHitbox(0.5f, 0.f).GetY() &&                   // r1 top edge past r2 bottom
+		GetHitbox(0.5f, 0.f).GetY() <= otherEntity->GetHitbox(0.5f, 1.f).GetY())        // r1 bottom edge past r2 top
 	{
 		std::cout << "Collision detected!" << std::endl;
 		return true;
