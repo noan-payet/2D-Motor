@@ -13,6 +13,9 @@ private:
 
 	float _deltaTime = 0.f;
 
+	int life = 0;
+	int newLife = 0;
+
 public:
 	Dodger() {};
 	~Dodger() {};
@@ -22,6 +25,9 @@ public:
 	void Update() override;
 
 	void Draw(Window* window) override;
+
+public:
+	void LoseLife();
 };
 
 #endif // !_H__DODGER

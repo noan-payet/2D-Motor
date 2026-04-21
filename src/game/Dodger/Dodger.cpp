@@ -12,8 +12,9 @@ void Dodger::InitEntity(Window* window, std::string path, float deltaTime, Vecto
 
 	_spriteLife = new Sprite("res/game/Life.png", GetHitbox(0.75f, 1.f));
 	_spriteLife->loadSprite(window);
+	_spriteLife->Resize(_spriteLife->GetWidth() * 0.25f, _spriteLife->GetHeight() * 0.25f);
 
-	//_spriteLife->SetWidth(_spriteLife->GetWidth() / 3);
+	_spriteLife->SetWidth(_spriteLife->GetWidth() / 3);
 
 	_deltaTime = deltaTime;
 }
@@ -32,4 +33,9 @@ void Dodger::Draw(Window* window)
 {
 	_sprite->Draw(window);
 	_spriteLife->Draw(window);
+}
+
+void Dodger::LoseLife()
+{
+	++life; _spriteLife->SetWidthInt(_spriteLife->GetOriginalWidth() * life / 3);
 }

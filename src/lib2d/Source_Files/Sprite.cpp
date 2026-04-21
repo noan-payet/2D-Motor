@@ -6,6 +6,11 @@ Sprite::Sprite(std::string path, Position position)
 {
 	_width = 0.f;
 	_height = 0.f;
+
+	_newWidth = _width;
+	_newHeight = _height;
+
+	newSizeX = newSizeY = 0;
 }
 
 void Sprite::loadSprite(Window* window)
@@ -18,32 +23,40 @@ void Sprite::loadSprite(Window* window)
 	}
 
 	SDL_GetTextureSize(_texture, &_width, &_height);
+
+	_newWidth = _width;
+	_newHeight = _height;
 }
 
 float Sprite::GetWidth() const
 {
-	return _width;
+	return _newWidth;
 }
 
 float Sprite::GetHeight() const
 {
-	return _height;
+	return _newHeight;
 }
 
 void Sprite::SetWidth(float width)
 {
-	_width = width;
+	_newWidth = width;
 }
 
 void Sprite::SetHeight(float height)
 {
-	_height = height;
+	_newHeight = height;
 }
 
 void Sprite::Draw(Window* window)
 {
-	SDL_FRect rect = { GetPos().GetX(), GetPos().GetY(), _width, _height};
-	SDL_RenderTexture(window->_renderer, _texture, NULL, &rect);
+	SDL_FRect rectShow = { GetPos().GetX(), GetPos().GetY(), _newWidth, _newHeight };
+	SDL_FRect rect = { newSizeX, newSizeY, _newWidth, _newHeight };
+
+	if (_width == _newWidth && _height == _newHeight && newSizeX == 0 && newSizeY == 0)
+		SDL_RenderTexture(window->_renderer, _texture, NULL, &rectShow);
+	else
+		SDL_RenderTexture(window->_renderer, _texture, &rect, &rectShow);
 }
 
 void Sprite::Resize(float w, float h)
@@ -55,6 +68,9 @@ void Sprite::Resize(float w, float h)
 
 	_width *= factorMin;
 	_height *= factorMin;
+
+	_newWidth = _width;
+	_newHeight = _height;
 }
 
 Vector2f Sprite::GetHitbox(float anchorX, float anchorY)

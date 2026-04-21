@@ -28,7 +28,7 @@ void DodgerScene::UpdateScene(Window* window)
 		scoreCouldown = 0;
 	}
 
-	std::cout << '\n' << '\n';
+	std::cout << '\n';
 	std::cout << "Score: " << score << std::endl;
 	std::cout << "Player life: " << playerLife << std::endl;
 	std::cout << "Player invincibility cooldown: " << playerInvincibilityCouldown << std::endl;
@@ -47,11 +47,13 @@ void DodgerScene::UpdateScene(Window* window)
 
 			playerInvincibilityCouldown = 5.f;
 			playerLife -= 1;
+			GetEntity<Dodger>()->LoseLife();
 		}
 	}
 
 	if (playerLife <= 0)
 	{
+		system("cls");
 		std::cout << '\n' << '\n';
 		std::cout << "Game Over!" << std::endl;
 		std::cout << "Your score: " << score << std::endl;
