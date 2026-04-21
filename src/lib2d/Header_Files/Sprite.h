@@ -21,6 +21,9 @@ public:
 	float GetWidth() const;
 	float GetHeight() const;
 
+	void SetWidth(float width);
+	void SetHeight(float height);
+
 	void Resize(float w, float h);
 
 	Vector2f GetHitbox(float anchorX = 0.f, float anchorY = 0.f);

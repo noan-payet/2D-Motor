@@ -33,6 +33,31 @@ void DodgerScene::UpdateScene(Window* window)
 	std::cout << "Player life: " << playerLife << std::endl;
 	std::cout << "Player invincibility cooldown: " << playerInvincibilityCouldown << std::endl;
 
+	//COLISION SYSTEM
+	if (playerInvincibilityCouldown > 0.f)
+	{
+		playerInvincibilityCouldown -= 0.1f;
+	}
+
+	for (auto& o : GetEntities<SquareMob>())
+	{
+		if (GetEntity<Dodger>()->IsCollding(o) && playerInvincibilityCouldown <= 0.f)
+		{
+			o = nullptr;
+
+			playerInvincibilityCouldown = 5.f;
+			playerLife -= 1;
+		}
+	}
+
+	if (playerLife <= 0)
+	{
+		std::cout << '\n' << '\n';
+		std::cout << "Game Over!" << std::endl;
+		std::cout << "Your score: " << score << std::endl;
+		QuitScene();
+	}
+
 	//Spawn system
 	int spawnObstacle = rand() % WINDOW_HEIGHT + 720;
 
@@ -60,29 +85,5 @@ void DodgerScene::UpdateScene(Window* window)
 
 		float size = rand() % 3 + 1;
 		mob->ReScale(mob->GetWidth() * size, mob->GetHeight() * size);
-	}
-
-	if (playerInvincibilityCouldown > 0.f)
-	{
-		playerInvincibilityCouldown -= 0.1f;
-	}
-
-	for (auto& o : GetEntities<SquareMob>())
-	{
-		if (GetEntity<Dodger>()->IsCollding(o) && playerInvincibilityCouldown <= 0.f)
-		{
-			o = nullptr;
-
-			playerInvincibilityCouldown = 5.f;
-			playerLife -= 1;
-		}
-	}
-
-	if (playerLife <= 0)
-	{
-		std::cout << '\n' << '\n';
-		std::cout << "Game Over!" << std::endl;
-		std::cout << "Your score: " << score << std::endl;
-		QuitScene();
 	}
 }

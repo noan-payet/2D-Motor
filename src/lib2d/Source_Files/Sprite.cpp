@@ -30,6 +30,16 @@ float Sprite::GetHeight() const
 	return _height;
 }
 
+void Sprite::SetWidth(float width)
+{
+	_width = width;
+}
+
+void Sprite::SetHeight(float height)
+{
+	_height = height;
+}
+
 void Sprite::Draw(Window* window)
 {
 	SDL_FRect rect = { GetPos().GetX(), GetPos().GetY(), _width, _height};

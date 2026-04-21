@@ -9,7 +9,7 @@
 class Dodger : public Entity
 {
 private:
-	Sprite* _sprite = nullptr;
+	Sprite* _spriteLife = nullptr;
 
 	float _deltaTime = 0.f;
 
