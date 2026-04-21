@@ -8,7 +8,6 @@
 class SquareMob : public Entity
 {
 private:
-	Sprite* _sprite = nullptr;
 	Position _ballPos = Position();
 
 	float _deltaTime = 0.f;
@@ -20,8 +19,6 @@ public:
 	void InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos) override;
 
 	void Update() override;
-
-	void Draw(Window* window) override;
 };
 
 #endif // !_H__SQUAREMOB

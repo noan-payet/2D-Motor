@@ -32,6 +32,10 @@ void DodgerScene::UpdateScene(Window* window)
 	if (couldown >= spawnObstacle)
 	{
 		couldown = 0;
-		CreateEntity<SquareMob>()->InitEntity(window, "res/game/SqareMob.png", TARGET_DELTA_TIME, Vector2f({ (float)posX, (float)posY }));
+		SquareMob* mob = CreateEntity<SquareMob>();
+		mob->InitEntity(window, "res/game/SqareMob.png", TARGET_DELTA_TIME, Vector2f({ (float)posX, (float)posY }));
+
+		float size = rand() % 3 + 1;
+		mob->ReScale(mob->GetWidth() * size, mob->GetHeight() * size);
 	}
 }

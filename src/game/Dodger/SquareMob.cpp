@@ -41,8 +41,3 @@ void SquareMob::Update()
 	SetPos(GetPos().operator+(_ballPos.GetPos().Normalise().operator*(5)));
 	_sprite->SetPos(GetHitbox());
 }
-
-void SquareMob::Draw(Window* window)
-{
-	_sprite->Draw(window);
-}
