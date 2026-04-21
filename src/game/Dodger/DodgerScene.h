@@ -5,6 +5,10 @@
 
 class DodgerScene : public Scene
 {
+private:
+	int couldown = 0;
+	int score = 0;
+
 public:
 	DodgerScene() {};
 

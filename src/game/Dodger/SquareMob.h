@@ -9,6 +9,7 @@ class SquareMob : public Entity
 {
 private:
 	Sprite* _sprite = nullptr;
+	Position _ballPos = Position();
 
 	float _deltaTime = 0.f;
 

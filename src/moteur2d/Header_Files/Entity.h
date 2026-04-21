@@ -26,6 +26,9 @@ public:
 	float GetWidth() { return width; }
 	float GetHeight() { return height; }
 
+	void SetWidth(float width) { this->width = width; }
+	void SetHeight(float height) { this->height = height; }
+
 	Vector2f GetHitbox(float anchorX = 0.5f, float anchorY = 0.5f);
 	void SetHitbox(Vector2f newPos, float anchorX = 0.5f, float anchorY = 0.5f);
 };

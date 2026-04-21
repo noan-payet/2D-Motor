@@ -22,7 +22,7 @@ void SceneManager::ChooseScene()
 
 	std::cout << "4 : Dodge the Square\n\n";
 
-	std::cout << "Choisis une scene a jouer : (1-3)\n";
+	std::cout << "Choisis une scene a jouer : (1-" << (int)sceneList.size() << ")\n";
 	int choice;
 	std::cin >> choice;
 
