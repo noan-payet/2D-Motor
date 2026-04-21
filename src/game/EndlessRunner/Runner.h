@@ -29,8 +29,6 @@ private:
 
 public:
 	void Fall(Position &player);
-
-	bool IsCollding(Entity* otherEntity);
 	bool SetGravity(bool gravity) { return _gravity = gravity; }
 };
 

@@ -54,20 +54,6 @@ void Runner::Draw(Window* window)
 	_sprite->Draw(window);
 }
 
-bool Runner::IsCollding(Entity* otherEntity)
-{
-	if (GetPos().GetX() + width >= otherEntity->GetPos().GetX() &&                         // r1 right edge past r2 left
-		GetPos().GetX() <= otherEntity->GetPos().GetX() + otherEntity->GetWidth() &&       // r1 left edge past r2 right
-		GetPos().GetY() + height - 10 >= otherEntity->GetPos().GetY() &&                   // r1 top edge past r2 bottom
-		GetPos().GetY() <= otherEntity->GetPos().GetY() + otherEntity->GetHeight())        // r1 bottom edge past r2 top
-	{      
-		//std::cout << "Collision detected!" << std::endl;
-		return true;
-	}
-
-	return false;
-}
-
 void Runner::Fall(Position &player)
 {
 	if (_gravity == false)

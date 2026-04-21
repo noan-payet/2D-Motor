@@ -8,6 +8,10 @@ class DodgerScene : public Scene
 private:
 	int couldown = 0;
 	int score = 0;
+	int scoreCouldown = 0;
+
+	int playerLife = 3;
+	float playerInvincibilityCouldown = 0.f;
 
 public:
 	DodgerScene() {};

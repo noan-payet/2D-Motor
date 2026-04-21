@@ -10,6 +10,7 @@ void RunningGame::Init()
 	_window.CreateOurWindow("MasterClass", WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	_manager->GetPrincipalScene()->InitScene(&_window);
+	_manager->GetPrincipalScene()->BeginScene();
 
 	_window.isOpen();
 	_window.isRender();
@@ -25,7 +26,12 @@ void RunningGame::Loop()
 
 		timer.resetTimer();
 
-		_isRunning = Input::getInstance().Update();
+		if (Input::getInstance().Update() == false || _manager->GetPrincipalScene()->isQuitting() == false)
+		{
+			_isRunning = false;
+			break;
+		}
+
 		_manager->GetPrincipalScene()->UpdateAll();
 
 		_window.clear();
@@ -64,6 +70,7 @@ void RunningGame::ChangeScene()
 
 	if (choice == 1)
 	{
+		ChooseMainScene();
 		Init();
 		Loop();
 		ChangeScene();

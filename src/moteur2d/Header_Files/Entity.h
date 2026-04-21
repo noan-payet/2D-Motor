@@ -15,7 +15,9 @@ protected:
 
 public:
 	Entity(Position pos):
-		Position(pos) {}
+		Position(pos) {
+
+	}
 	Entity() :
 		Position() {}
 
@@ -36,6 +38,8 @@ public:
 
 	Vector2f GetHitbox(float anchorX = 0.5f, float anchorY = 0.5f);
 	void SetHitbox(Vector2f newPos, float anchorX = 0.5f, float anchorY = 0.5f);
+
+	bool IsCollding(Entity* otherEntity);
 };
 
 #endif

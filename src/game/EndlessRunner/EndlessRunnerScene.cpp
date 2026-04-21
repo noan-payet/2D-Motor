@@ -80,8 +80,7 @@ void EndlessRunnerScene::UpdateScene(Window* window)
 			std::cout << "Game Over!" << std::endl;
 			std::cout << "Your score: " << score << std::endl;
 			
-			RunningGame game;
-			game.ChangeScene();
+			QuitScene();
 		}
 	}
 }

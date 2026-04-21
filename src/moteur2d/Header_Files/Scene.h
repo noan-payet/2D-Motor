@@ -10,6 +10,7 @@ class Scene : public Drawable
 {
 private:
 	std::vector<class Entity*> entityList;
+	bool _isRunning = true;
 
 public:
 	Scene() {}
@@ -21,9 +22,12 @@ public:
 	void UpdateAll();
 	virtual void UpdateScene(Window* window) {}
 
+	void BeginScene() { _isRunning = true; }
+	void QuitScene() { _isRunning = false; }
+	bool isQuitting() { return _isRunning; }
+
 	template<class T>
 	T* CreateEntity();
-
 
 	template<class T>
 	T* GetEntity();
