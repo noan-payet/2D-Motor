@@ -25,6 +25,14 @@ bool Input::isKeyUp(SDL_Keycode key)
 	return _previousKeyboardState[scancode] == 1 && _key_states[scancode] == 0;
 }
 
+Vector2f Input::GetMousePosition() const
+{
+	float x, y;
+	SDL_GetMouseState(&x, &y);
+
+	return Vector2f({ x, y });
+}
+
 bool Input::Update()
 {
 	while (SDL_PollEvent(&event))

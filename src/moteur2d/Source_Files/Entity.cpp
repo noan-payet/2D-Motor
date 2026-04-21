@@ -15,3 +15,13 @@ void Entity::InitEntity(Window* window, std::string path, float deltaTime, Vecto
 {
 
 }
+
+Vector2f Entity::GetHitbox(float anchorX, float anchorY)
+{
+	return Vector2f({ GetPos().GetX() - width * anchorX, GetPos().GetY() - height * anchorY });
+}
+
+void Entity::SetHitbox(Vector2f newPos, float anchorX, float anchorY)
+{
+	SetPos(Vector2f({ newPos.GetX() + width * anchorX, newPos.GetY() + height * anchorY}));
+}

@@ -4,6 +4,7 @@
 #include "game/SceneBall.h"
 #include "game/ScenePong.h"
 #include "game/EndlessRunner/EndlessRunnerScene.h"
+#include "game/Dodger/DodgerScene.h"
 
 int main()
 {
@@ -14,10 +15,12 @@ int main()
     Shoot_them_up* shoot = new Shoot_them_up(TARGET_DELTA_TIME);
     SceneBall* sceneball = new SceneBall();
 	EndlessRunnerScene* endlessRunnerScene = new EndlessRunnerScene();
+	DodgerScene* dodgerScene = new DodgerScene();
 
     gameManager.AddScenes(shoot);
     gameManager.AddScenes(sceneball);
 	gameManager.AddScenes(endlessRunnerScene);
+	gameManager.AddScenes(dodgerScene);
 
 	gameManager.ChooseMainScene();
 

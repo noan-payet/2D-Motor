@@ -2,6 +2,7 @@
 #define INPUT
 
 #include <SDL3/SDL.h>
+#include "lib2d/Header_Files/Vector2f.h"
 
 class Input
 {
@@ -24,6 +25,8 @@ public:
 	bool isKeyDown(SDL_Keycode key);
 	bool isKeyHeld(SDL_Keycode key);
 	bool isKeyUp(SDL_Keycode key);
+
+	Vector2f GetMousePosition() const;
 
 	bool Update();
 };
