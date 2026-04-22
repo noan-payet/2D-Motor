@@ -7,6 +7,9 @@ class ClickerScene : public Scene
 {
 private:
 	int couldown = 0;
+	int alpha = 0;
+
+	float transparenceCouldown = 0.f;
 
 public:
 	void InitScene(Window* window) override;

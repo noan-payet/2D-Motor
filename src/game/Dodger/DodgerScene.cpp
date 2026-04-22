@@ -44,7 +44,7 @@ void DodgerScene::UpdateScene(Window* window)
 
 	for (auto& o : GetEntities<SquareMob>())
 	{
-		if (GetEntity<Dodger>()->IsCollding(o) && playerInvincibilityCouldown <= 0.f)
+		if (GetEntity<Dodger>()->IsColliding(o) && playerInvincibilityCouldown <= 0.f)
 		{
 			o = nullptr;
 

@@ -38,7 +38,7 @@ void Entity::SetHitbox(Vector2f newPos, float anchorX, float anchorY)
 	SetPos(Vector2f({ newPos.GetX() - width * anchorX, newPos.GetY() - height * anchorY}));
 }
 
-bool Entity::IsCollding(Entity* otherEntity)
+bool Entity::IsColliding(Entity* otherEntity)
 {
 	if (GetHitbox(1.f).GetX() >= otherEntity->GetHitbox(0.f).GetX() &&                         // r1 right edge past r2 left
 		GetHitbox(0.f).GetX() <= otherEntity->GetHitbox(1.f).GetX() &&       // r1 left edge past r2 right

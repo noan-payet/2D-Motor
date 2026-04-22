@@ -14,6 +14,7 @@ private:
 	float _newWidth, _newHeight;
 
 	int newSizeX, newSizeY;
+	int _alpha = 255;
 
 	bool isSpriteSheet;
 
@@ -22,7 +23,8 @@ public:
 
 	void Draw(Window* window) override;
 
-	void Transparence(int trans);
+	void SetAlpha(int trans);
+	int GetAlpha() const { return _alpha; }
 
 	void loadSprite(Window* window);
 

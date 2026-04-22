@@ -33,6 +33,8 @@ public:
 	int GetPriority() const { return priority; }
 	void SetPriority(int p) { priority = p; }
 
+	Sprite* GetSprite() { return _sprite; }
+
 	float GetWidth() { return width; }
 	float GetHeight() { return height; }
 
@@ -44,7 +46,7 @@ public:
 	Vector2f GetHitbox(float anchorX = 0.5f, float anchorY = 0.5f);
 	void SetHitbox(Vector2f newPos, float anchorX = 0.5f, float anchorY = 0.5f);
 
-	bool IsCollding(Entity* otherEntity);
+	bool IsColliding(Entity* otherEntity);
 };
 
 #endif

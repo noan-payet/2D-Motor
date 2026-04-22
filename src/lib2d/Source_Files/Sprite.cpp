@@ -53,15 +53,20 @@ void Sprite::Draw(Window* window)
 	SDL_FRect rectShow = { GetPos().GetX(), GetPos().GetY(), _newWidth, _newHeight };
 	SDL_FRect rect = { newSizeX, newSizeY, _newWidth, _newHeight };
 
+	SDL_SetTextureAlphaMod(_texture, _alpha);
+
 	if (isSpriteSheet == false)
 		SDL_RenderTexture(window->_renderer, _texture, NULL, &rectShow);
 	else
 		SDL_RenderTexture(window->_renderer, _texture, &rect, &rectShow);
 }
 
-void Sprite::Transparence(int trans)
+void Sprite::SetAlpha(int trans)
 {
-	SDL_SetTextureAlphaMod(_texture, trans);
+	_alpha = trans;
+
+	if (_alpha > 255)
+		_alpha = 255;
 }
 
 void Sprite::Resize(float w, float h)

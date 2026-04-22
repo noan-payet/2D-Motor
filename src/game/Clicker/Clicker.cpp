@@ -5,7 +5,7 @@ void Clicker::InitEntity(Window* window, std::string path, float deltaTime, Vect
 	SetPos(pos);
 	_sprite = new Sprite(path, GetPos());
 	_sprite->loadSprite(window);
-	_sprite->Transparence(128);
+	_sprite->SetAlpha(128);
 
 	width = _sprite->GetWidth();
 	height = _sprite->GetHeight();

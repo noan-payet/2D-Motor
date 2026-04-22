@@ -32,7 +32,7 @@ void EndlessRunnerScene::UpdateScene(Window* window)
 	{
 		for (auto& o : GetEntities<Ground>())
 		{
-			if (GetEntity<Runner>()->IsCollding(o))
+			if (GetEntity<Runner>()->IsColliding(o))
 			{
 				GetEntity<Runner>()->SetGravity(false);
 				GetEntity<Runner>()->SetPos({ GetEntity<Runner>()->GetPos().GetX(), 290.f });
@@ -74,7 +74,7 @@ void EndlessRunnerScene::UpdateScene(Window* window)
 
 	for (auto& o : GetEntities<Obstacle>())
 	{
-		if (GetEntity<Runner>()->IsCollding(o))
+		if (GetEntity<Runner>()->IsColliding(o))
 		{ 
 			std::cout << '\n' << '\n';
 			std::cout << "Game Over!" << std::endl;

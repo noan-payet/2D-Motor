@@ -8,19 +8,38 @@
 void ClickerScene::InitScene(Window* window)
 {
 	CreateEntity<Clicker>()->InitEntity(window, "res/game/camera.png", TARGET_DELTA_TIME, Vector2f({ 640.f, 360.f }));
-	GetEntity<Clicker>()->SetPriority(-1);
+	Clicker* clicker = GetEntity<Clicker>();
+	clicker->SetPriority(-1);
+	alpha = clicker->GetSprite()->GetAlpha();
 }
 
 void ClickerScene::UpdateScene(Window* window)
 {
-	// Collision
 	Clicker* clicker = GetEntity<Clicker>();
+
+	if (transparenceCouldown > 0.f)
+	{
+		clicker->GetSprite()->SetAlpha(alpha + alpha * transparenceCouldown);
+		transparenceCouldown -= 0.01f;
+	}
+	else
+		transparenceCouldown = 0.f;
+
+	bool shoot = false;
+
+	if (clicker->Shoot() && transparenceCouldown == 0.f)
+	{
+		transparenceCouldown = 1.f;
+		shoot = true;
+	}
+
+	// Collision
 	for (auto& o : GetEntities<SquareMob>())
 	{
-		if (GetEntity<Clicker>()->IsCollding(o) && clicker->Shoot())
+		if (GetEntity<Clicker>()->IsColliding(o))
 		{
-			o = nullptr;
 			std::cout << "Shoot !\n";
+			EraseEntity<SquareMob>(o);
 		}
 	}
 

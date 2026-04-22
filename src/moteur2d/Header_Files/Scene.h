@@ -33,6 +33,9 @@ public:
 	T* GetEntity();
 
 	template<class T>
+	void EraseEntity(T* entity);
+
+	template<class T>
 	std::vector<T*> GetEntities();
 };
 
@@ -54,6 +57,18 @@ inline T* Scene::GetEntity()
 	}
 
 	return nullptr;
+}
+
+template<class T>
+inline void Scene::EraseEntity(T* entity)
+{
+	for (std::size_t i = entityList.size(); i > 0; --i) {
+		size_t idx = i - 1;
+		if (T* t = dynamic_cast<T*>(entityList[idx])) {
+			if (entity == t)
+				entityList.erase(entityList.begin() + idx);
+		}
+	}
 }
 
 template<class T>
