@@ -27,3 +27,9 @@ bool Clicker::Shoot()
 	Input& input = Input::getInstance();
 	return input.IsLeftMouseClick();
 }
+
+bool Clicker::Take()
+{
+	Input& input = Input::getInstance();
+	return input.IsRightMouseClick();
+}

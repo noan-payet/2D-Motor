@@ -8,6 +8,8 @@ class ClickerScene : public Scene
 private:
 	int couldown = 0;
 	int alpha = 0;
+	int attack;
+	int combo = 0;
 
 	float transparenceCouldown = 0.f;
 

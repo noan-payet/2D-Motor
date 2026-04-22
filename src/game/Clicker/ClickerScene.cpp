@@ -4,6 +4,7 @@
 
 #include "game/Clicker/Clicker.h"
 #include "game/Dodger/SquareMob.h"
+#include "game/Clicker/Skill_Tree.h"
 
 void ClickerScene::InitScene(Window* window)
 {
@@ -36,10 +37,67 @@ void ClickerScene::UpdateScene(Window* window)
 	// Collision
 	for (auto& o : GetEntities<SquareMob>())
 	{
-		if (GetEntity<Clicker>()->IsColliding(o))
+		if (GetEntity<Clicker>()->IsColliding(o) && shoot)
 		{
+			system("cls");
 			std::cout << "Shoot !\n";
 			EraseEntity<SquareMob>(o);
+
+			int skillSpawnX = rand() % 10 + 1;
+			int skillSpawnY = rand() % 10 + 1;
+
+			int skillSpawn = rand() % 3 + 1;
+
+			++combo;
+
+			Skill_Tree* Skill = CreateEntity<Skill_Tree>();
+
+			switch (skillSpawn)
+			{
+			case 1:
+				Skill->InitEntity(window, "res/game/Skill/SkillPower.png", TARGET_DELTA_TIME, Vector2f({ clicker->GetHitbox((float)skillSpawnX * 0.1f, (float)skillSpawnY * 0.1f) }));
+				Skill->SetSkillNumber(1);
+				break;
+
+			case 2:
+				Skill->InitEntity(window, "res/game/Skill/SkillGrow.png", TARGET_DELTA_TIME, Vector2f({ clicker->GetHitbox((float)skillSpawnX * 0.1f, (float)skillSpawnY * 0.1f) }));
+				Skill->SetSkillNumber(2);
+				break;
+
+			case 3:
+				Skill->InitEntity(window, "res/game/Skill/Skill_Multiplicator.png", TARGET_DELTA_TIME, Vector2f({ clicker->GetHitbox((float)skillSpawnX * 0.1f, (float)skillSpawnY * 0.1f) }));
+				Skill->SetSkillNumber(3);
+				break;
+			}
+		}
+		else if (shoot)
+			combo = 1;
+	}
+
+	if (clicker->GetWidth() > 32)
+		clicker->ReScale(clicker->GetWidth() - 1.f / combo, clicker->GetHeight() - 1.f / combo);
+
+	for (auto& o : GetEntities<Skill_Tree>())
+	{
+		if (GetEntity<Clicker>()->IsColliding(o) && clicker->Take())
+		{
+			EraseEntity<Skill_Tree>(o);
+
+			switch (o->GetSkillNumber())
+			{
+			case 1:
+				++attack;
+				break;
+
+			case 2:
+				clicker->ReScale(clicker->GetWidth() + 10, clicker->GetHeight() + 10);
+				break;
+
+			case 3:
+				attack *= 2;
+				clicker->ReScale(clicker->GetWidth() * 2, clicker->GetHeight() * 2);
+				break;
+			}
 		}
 	}
 
