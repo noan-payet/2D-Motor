@@ -49,12 +49,16 @@ void RunningGame::Loop()
 		if (_diff <= 0.f)
 		{
 			std::this_thread::sleep_for(std::chrono::duration<double>(TARGET_DELTA_TIME));
-			std::cout << "FPS : " << (int)(1 / TARGET_DELTA_TIME) << std::endl;
+			
+			if (showFPS)
+				std::cout << "FPS : " << (int)(1 / TARGET_DELTA_TIME) << std::endl;
 		}
 		else
 		{
 			std::this_thread::sleep_for(std::chrono::duration<double>(_diff));
-			std::cout << "FPS : " << (int)(1 / _diff) << std::endl;
+
+			if (showFPS)
+				std::cout << "FPS : " << (int)(1 / _diff) << std::endl;
 		}
 	}
 

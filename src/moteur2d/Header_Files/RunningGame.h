@@ -21,6 +21,7 @@ private:
 	Timer timer;
 
 	bool _isRunning = true;
+	bool showFPS = false;
 
 public:
 	RunningGame():

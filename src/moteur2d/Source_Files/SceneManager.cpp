@@ -22,6 +22,11 @@ void SceneManager::ChooseScene()
 
 	std::cout << "4 : Dodge the Square\n\n";
 
+	std::cout << "5 : Clicker\n";
+	std::cout << "Dans ce clicker, vous controller une camera et devez prendre des photos des slimes pour les tuer.\n";
+	std::cout << "Pour deplacer le personnage, vous devrez vous servir de votre souris.\n";
+	std::cout << "Click Droit pour prendre des photos et Echap pour quitter le jeu et avoir votre score.\n\n";
+
 	std::cout << "Choisis une scene a jouer : (1-" << (int)sceneList.size() << ")\n";
 	int choice;
 	std::cin >> choice;

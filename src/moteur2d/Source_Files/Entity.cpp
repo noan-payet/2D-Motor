@@ -36,6 +36,7 @@ Vector2f Entity::GetHitbox(float anchorX, float anchorY)
 void Entity::SetHitbox(Vector2f newPos, float anchorX, float anchorY)
 {
 	SetPos(Vector2f({ newPos.GetX() - width * anchorX, newPos.GetY() - height * anchorY}));
+	_sprite->SetPos(GetPos());
 }
 
 bool Entity::IsColliding(Entity* otherEntity)

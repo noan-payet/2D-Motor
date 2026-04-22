@@ -19,6 +19,14 @@ public:
 	void InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos) override;
 
 	void Update() override;
+
+private:
+	float life = 1;
+
+public:
+	void LoseLife(int attack) { life -= attack; }
+	void SetLife(float life) { this->life = life; }
+	float GetLife() { return life; }
 };
 
 #endif // !_H__SQUAREMOB
