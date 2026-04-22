@@ -23,7 +23,7 @@ public:
 	virtual void UpdateScene(Window* window) {}
 
 	void BeginScene() { _isRunning = true; }
-	void QuitScene() { _isRunning = false; }
+	void QuitScene() { entityList.clear(); _isRunning = false; }
 	bool isQuitting() { return _isRunning; }
 
 	template<class T>
