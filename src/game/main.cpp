@@ -5,6 +5,7 @@
 #include "game/ScenePong.h"
 #include "game/EndlessRunner/EndlessRunnerScene.h"
 #include "game/Dodger/DodgerScene.h"
+#include "game/Clicker/ClickerScene.h"
 
 int main()
 {
@@ -16,11 +17,13 @@ int main()
     SceneBall* sceneball = new SceneBall();
 	EndlessRunnerScene* endlessRunnerScene = new EndlessRunnerScene();
 	DodgerScene* dodgerScene = new DodgerScene();
+    ClickerScene* clicker = new ClickerScene();
 
     gameManager.AddScenes(shoot);
     gameManager.AddScenes(sceneball);
 	gameManager.AddScenes(endlessRunnerScene);
 	gameManager.AddScenes(dodgerScene);
+    gameManager.AddScenes(clicker);
 
 	gameManager.ChooseMainScene();
 

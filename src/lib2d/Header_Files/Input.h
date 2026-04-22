@@ -30,6 +30,9 @@ public:
 	void ShowMouseCursor() { SDL_ShowCursor(); }
 	void HideMouseCursor() { SDL_HideCursor(); }
 
+	bool IsLeftMouseClick();
+	bool IsRightMouseClick();
+
 	bool Update();
 };
 

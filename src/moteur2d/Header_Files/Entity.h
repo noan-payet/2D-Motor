@@ -13,6 +13,8 @@ protected:
 
 	float width = 0.f, height = 0.f;
 
+	int priority = 0;
+
 public:
 	Entity(Position pos):
 		Position(pos) {
@@ -28,6 +30,9 @@ public:
 	virtual void InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos);
 
 public:
+	int GetPriority() const { return priority; }
+	void SetPriority(int p) { priority = p; }
+
 	float GetWidth() { return width; }
 	float GetHeight() { return height; }
 

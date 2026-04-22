@@ -8,7 +8,10 @@
 void DodgerScene::InitScene(Window* window)
 {
 	CreateEntity<Entity>()->InitEntity(window, "res/game/Background/Background.png", TARGET_DELTA_TIME, Vector2f({ 0.f, 0.f }));
+
 	CreateEntity<Dodger>()->InitEntity(window, "res/game/Dodger.png", TARGET_DELTA_TIME, Vector2f({ 640.f, 360.f }));
+	Dodger* dodger = GetEntity<Dodger>();
+	dodger->ReScale(dodger->GetWidth() * 0.25f, dodger->GetHeight() * 0.25f);
 
 	couldown = 0;
 	score = 0;

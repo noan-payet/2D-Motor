@@ -59,6 +59,11 @@ void Sprite::Draw(Window* window)
 		SDL_RenderTexture(window->_renderer, _texture, &rect, &rectShow);
 }
 
+void Sprite::Transparence(int trans)
+{
+	SDL_SetTextureAlphaMod(_texture, trans);
+}
+
 void Sprite::Resize(float w, float h)
 {
 	float factorWidth = w / _newWidth;

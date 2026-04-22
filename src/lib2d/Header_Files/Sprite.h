@@ -22,6 +22,8 @@ public:
 
 	void Draw(Window* window) override;
 
+	void Transparence(int trans);
+
 	void loadSprite(Window* window);
 
 	float GetWidth() const;

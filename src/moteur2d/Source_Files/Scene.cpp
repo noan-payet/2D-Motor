@@ -3,9 +3,19 @@
 
 void Scene::Draw(Window* window)
 {
+	if (entityList.size() == 0)
+		return;
+
 	for (auto& e : entityList)
 	{
-		e->Draw(window);
+		if (e->GetPriority() != -1)
+			e->Draw(window);
+	}
+
+	for (auto& e : entityList)
+	{
+		if (e->GetPriority() == -1)
+			e->Draw(window);
 	}
 }
 

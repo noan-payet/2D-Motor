@@ -33,6 +33,22 @@ Vector2f Input::GetMousePosition() const
 	return Vector2f({ x, y });
 }
 
+bool Input::IsLeftMouseClick()
+{
+	float x, y;
+	Uint32 buttons = SDL_GetMouseState(&x, &y);
+
+	return buttons & SDL_BUTTON_MASK(SDL_BUTTON_LEFT);
+}
+
+bool Input::IsRightMouseClick()
+{
+	float x, y;
+	Uint32 buttons = SDL_GetMouseState(&x, &y);
+
+	return buttons & SDL_BUTTON_MASK(SDL_BUTTON_RIGHT);
+}
+
 bool Input::Update()
 {
 	while (SDL_PollEvent(&event))
