@@ -75,7 +75,7 @@ void ClickerScene::UpdateScene(Window* window)
 	}
 
 	if (clicker->GetWidth() > 32)
-		clicker->ReScale(clicker->GetWidth() - 1.f / combo, clicker->GetHeight() - 1.f / combo);
+		clicker->ReScale(clicker->GetWidth() - 0.5f / combo, clicker->GetHeight() - 0.5f / combo);
 
 	for (auto& o : GetEntities<Skill_Tree>())
 	{
