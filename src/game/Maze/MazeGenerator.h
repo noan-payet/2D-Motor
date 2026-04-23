@@ -2,6 +2,7 @@
 #define _H__MAZE_GENERATOR
 
 #include "moteur2d/Header_Files/Entity.h"
+#include <vector>
 
 class MazeGenerator : public Entity
 {
@@ -12,6 +13,16 @@ public:
 	void InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos) override;
 
 	void Update() override;
+
+	void Draw(Window* window) override;
+
+private:
+	int mazeWidth, mazeHeight;
+	std::vector<std::vector<bool>> mazeGrid; // true for wall, false for path
+	Sprite* _spriteResolve = nullptr;
+
+public:
+	void GenerateMaze(int width, int height);
 };
 
 #endif // !_H__MAZE_GENERATOR

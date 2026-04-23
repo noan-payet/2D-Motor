@@ -63,8 +63,10 @@ void Sprite::Draw(Window* window)
 
 void Sprite::DrawLine(Window* window, Vector2f start, Vector2f end, int thickness)
 {
-	SDL_SetRenderDrawColor(window->_renderer, 255, 0, 0, 255);
+	SDL_SetRenderDrawColor(window->_renderer, 255, 255, 255, 255);
 	SDL_RenderLine(window->_renderer, start.GetX(), start.GetY(), end.GetX(), end.GetY());
+
+	SDL_SetRenderDrawColor(window->_renderer, 0, 0, 0, 255);
 }
 
 void Sprite::SetAlpha(int trans)

@@ -6,6 +6,8 @@
 #include "game/EndlessRunner/EndlessRunnerScene.h"
 #include "game/Dodger/DodgerScene.h"
 #include "game/Clicker/ClickerScene.h"
+//#include "game/ShootThemUp/Shoot_them_up.h"
+#include "game/Maze/MazeScene.h"
 
 int main()
 {
@@ -18,12 +20,14 @@ int main()
 	EndlessRunnerScene* endlessRunnerScene = new EndlessRunnerScene();
 	DodgerScene* dodgerScene = new DodgerScene();
     ClickerScene* clicker = new ClickerScene();
+	MazeScene* mazeScene = new MazeScene();
 
     gameManager.AddScenes(shoot);
     gameManager.AddScenes(sceneball);
 	gameManager.AddScenes(endlessRunnerScene);
 	gameManager.AddScenes(dodgerScene);
     gameManager.AddScenes(clicker);
+	gameManager.AddScenes(mazeScene);
 
 	gameManager.ChooseMainScene();
 
