@@ -6,8 +6,14 @@
 
 void MazeScene::InitScene(Window* window)
 {
-	CreateEntity<MazeGenerator>()->InitEntity(window, "", TARGET_DELTA_TIME, { 253.2f, 50.f });
-	GetEntity<MazeGenerator>()->GenerateMaze(5, 5);
+	MazeGenerator* mazeGen = CreateEntity<MazeGenerator>();
+
+	int mazeSize = 20;
+	float centerX = WINDOW_WIDTH * 1.f / mazeSize;
+	float centerY = 50.f;
+
+	mazeGen->InitEntity(window, "", TARGET_DELTA_TIME, { centerX, centerY });
+	mazeGen->GenerateMaze(mazeSize, mazeSize);
 }
 
 void MazeScene::UpdateScene(Window* window)

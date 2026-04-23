@@ -24,79 +24,98 @@ void MazeGenerator::Draw(Window* window)
 	Vector2f startPath;
 	Vector2f endPath;
 
+	int lineSize = 140.f; // Calculate line size based on maze width
+
 	// Draw the paths based on the mazeGrid
 	for (int row = 0; row < mazeHeight - 1; ++row) {
 		for (int col = 0; col < mazeWidth - 1; ++col) {
 			
-			// Draw hoizontal line
-			startPath = { _spriteResolve->GetPos().GetX() + col * 140.f, _spriteResolve->GetPos().GetY() + row * 140.f };
-			endPath = { startPath.GetX() + 140.f, startPath.GetY() };
-
-			_spriteResolve->DrawLine(window, startPath, endPath);
-
-			// Draw vertical line
-			startPath = { _spriteResolve->GetPos().GetX() + col * 140.f, _spriteResolve->GetPos().GetY() + row * 140.f };
-			endPath = { startPath.GetX(), startPath.GetY() + 140.f };
-
-			_spriteResolve->DrawLine(window, startPath, endPath);
-		}
-	}
-
-	// Draw last horizontal line
-	for (int col = 0; col < mazeWidth - 1; ++col) {
-		startPath = { _spriteResolve->GetPos().GetX() + col * 140.f, _spriteResolve->GetPos().GetY() + (mazeHeight - 1) * 140.f };
-		endPath = { startPath.GetX() + 140.f, startPath.GetY() };
-
-		_spriteResolve->DrawLine(window, startPath, endPath);
-	}
-
-	// Draw last vertical line
-	for (int row = 0; row < mazeHeight - 1; ++row) {
-		startPath = { _spriteResolve->GetPos().GetX() + (mazeWidth - 1) * 140.f, _spriteResolve->GetPos().GetY() + row * 140.f };
-		endPath = { startPath.GetX(), startPath.GetY() + 140.f };
-
-		_spriteResolve->DrawLine(window, startPath, endPath);
-	}
-
-	// Draw the maze based on the mazeGrid
-	for (int row = 0; row < mazeHeight; ++row) {
-		for (int col = 0; col < mazeWidth; ++col) {
-
-			if (mazeGrid[row][col] == true)
+			switch (paths[row][col])
 			{
+			case 1:
 				// Draw hoizontal line
-				startWall = { GetPos().GetX() + col * 140.f, GetPos().GetY() + row * 140.f };
-				endWall = { startWall.GetX() + 140.f, startWall.GetY() };
+				startPath = { _spriteResolve->GetPos().GetX() + col * lineSize, _spriteResolve->GetPos().GetY() + row * lineSize };
+				endPath = { startPath.GetX() + lineSize, startPath.GetY() };
 
-				_sprite->DrawLine(window, startWall, endWall);
+				_spriteResolve->DrawLine(window, startPath, endPath);
+				break;
 
+			case 2:
 				// Draw vertical line
-				startWall = { GetPos().GetX() + col * 140.f, GetPos().GetY() + row * 140.f };
-				endWall = { startWall.GetX(), startWall.GetY() + 140.f };
+				startPath = { _spriteResolve->GetPos().GetX() + col * lineSize, _spriteResolve->GetPos().GetY() + row * lineSize };
+				endPath = { startPath.GetX(), startPath.GetY() + lineSize };
 
-				_sprite->DrawLine(window, startWall, endWall);
+				_spriteResolve->DrawLine(window, startPath, endPath);
+				break;
 			}
 		}
 	}
 
-	if (mazeGrid[mazeHeight - 1][mazeWidth - 1] == true)
-	{
-		// Draw last horizontal line
-		for (int col = 0; col < mazeWidth; ++col) {
-			startWall = { GetPos().GetX() + col * 140.f, GetPos().GetY() + mazeHeight * 140.f };
-			endWall = { startWall.GetX() + 140.f, startWall.GetY() };
+	for (int row = 0; row < mazeHeight - 1; ++row) {
 
-			_sprite->DrawLine(window, startWall, endWall);
-		}
+		for (int col = 0; col < mazeWidth - 1; ++col) {
 
-		// Draw last vertical line
-		for (int row = 0; row < mazeHeight; ++row) {
-			startWall = { GetPos().GetX() + mazeWidth * 140.f, GetPos().GetY() + row * 140.f };
-			endWall = { startWall.GetX(), startWall.GetY() + 140.f };
+			switch (paths[row][col])
+			{
+			case 1:
+				// Draw last vertical line
+				startPath = { _spriteResolve->GetPos().GetX() + (mazeWidth - 1) * lineSize, _spriteResolve->GetPos().GetY() + row * lineSize };
+				endPath = { startPath.GetX(), startPath.GetY() + lineSize };
 
-			_sprite->DrawLine(window, startWall, endWall);
+				_spriteResolve->DrawLine(window, startPath, endPath);
+				break;
+
+			case 2:
+				// Draw last horizontal line
+				startPath = { _spriteResolve->GetPos().GetX() + col * lineSize, _spriteResolve->GetPos().GetY() + (mazeHeight - 1) * lineSize };
+				endPath = { startPath.GetX() + lineSize, startPath.GetY() };
+
+				_spriteResolve->DrawLine(window, startPath, endPath);
+				break;
+			}
 		}
 	}
+
+	//// Draw the maze based on the mazeGrid
+	//for (int row = 0; row < mazeHeight; ++row) {
+	//	for (int col = 0; col < mazeWidth; ++col) {
+
+	//		if (mazeGrid[row][col] == true)
+	//		{
+	//			// Draw hoizontal line
+	//			startWall = { GetPos().GetX() + col * 140.f, GetPos().GetY() + row * 140.f };
+	//			endWall = { startWall.GetX() + 140.f, startWall.GetY() };
+
+	//			_sprite->DrawLine(window, startWall, endWall);
+
+	//			// Draw vertical line
+	//			startWall = { GetPos().GetX() + col * 140.f, GetPos().GetY() + row * 140.f };
+	//			endWall = { startWall.GetX(), startWall.GetY() + 140.f };
+
+	//			_sprite->DrawLine(window, startWall, endWall);
+	//		}
+	//	}
+	//}
+
+	//for (int row = 0; row < mazeHeight; ++row) {
+	//	for (int col = 0; col < mazeWidth; ++col) {
+
+	//		if (mazeGrid[mazeHeight - 1][mazeWidth - 1] == true)
+	//		{
+	//			// Draw last vertical line
+	//			startWall = { GetPos().GetX() + mazeWidth * 140.f, GetPos().GetY() + row * 140.f };
+	//			endWall = { startWall.GetX(), startWall.GetY() + 140.f };
+
+	//			_sprite->DrawLine(window, startWall, endWall);
+
+	//			// Draw last horizontal line
+	//			startWall = { GetPos().GetX() + col * 140.f, GetPos().GetY() + mazeHeight * 140.f };
+	//			endWall = { startWall.GetX() + 140.f, startWall.GetY() };
+
+	//			_sprite->DrawLine(window, startWall, endWall);
+	//		}
+	//	}
+	//}
 }
 
 void MazeGenerator::GenerateMaze(int width, int height)
@@ -105,4 +124,24 @@ void MazeGenerator::GenerateMaze(int width, int height)
 	mazeHeight = height;
 
 	mazeGrid.resize(mazeHeight, std::vector<bool>(mazeWidth, true)); // Initialize all cells as walls
+	paths.resize(mazeHeight, std::vector<int>(mazeWidth, 0)); // Initialize paths
+
+	for (int row = 0; row < mazeHeight - 1; ++row) {
+		for (int col = 0; col < mazeWidth - 1; ++col) {
+
+			int pathType = rand() % 2 + 1; // Randomly choose between horizontal (1) and vertical (2) path
+			paths[row][col] = pathType;
+
+			if (pathType == 1) {
+				// Create horizontal path
+				mazeGrid[row][col] = false;
+				mazeGrid[row][col + 1] = false;
+			}
+			else {
+				// Create vertical path
+				mazeGrid[row][col] = false;
+				mazeGrid[row + 1][col] = false;
+			}
+		}
+	}
 }

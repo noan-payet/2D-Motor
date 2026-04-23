@@ -17,8 +17,11 @@ public:
 	void Draw(Window* window) override;
 
 private:
-	int mazeWidth, mazeHeight;
+	int mazeWidth = 0, mazeHeight = 0;
+	std::vector<std::vector<int>> paths;
+
 	std::vector<std::vector<bool>> mazeGrid; // true for wall, false for path
+
 	Sprite* _spriteResolve = nullptr;
 
 public:
