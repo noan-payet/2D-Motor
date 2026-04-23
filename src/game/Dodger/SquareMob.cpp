@@ -5,7 +5,7 @@ void SquareMob::InitEntity(Window* window, std::string path, float deltaTime, Ve
 {
 	SetPos(pos);
 
-	_sprite = new Sprite(path, GetPos());
+	_sprite = new Sprite(GetPos(), path);
 	_sprite->loadSprite(window);
 	_sprite->Resize(_sprite->GetWidth() * 3, _sprite->GetHeight() * 3);
 

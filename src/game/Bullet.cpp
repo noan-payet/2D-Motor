@@ -19,7 +19,7 @@ bool Bullet::Coliding(Sprite* target)
 
 void Bullet::InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos)
 {
-	_bulletImage = new Sprite{ path, pos};
+	_bulletImage = new Sprite{ pos, path };
 	_bulletImage->loadSprite(window);
 	_bulletImage->Resize(_bulletImage->GetWidth(), _bulletImage->GetHeight());
 	_bulletImage->SetPos(_bulletImage->GetHitbox(0.f, 0.5f));

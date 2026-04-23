@@ -4,7 +4,7 @@
 void Player::InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos)
 {
 	SetPos(pos);
-	_spritePlayer = new Sprite(path, GetPos());
+	_spritePlayer = new Sprite(GetPos(), path);
 	_spritePlayer->loadSprite(window);
 	_spritePlayer->Resize(100.f, 100.f);
 

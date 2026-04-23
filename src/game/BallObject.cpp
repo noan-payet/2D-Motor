@@ -33,7 +33,7 @@ void BallObject::Draw(Window* window)
 
 void BallObject::InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos)
 {
-	_ballSprite = new Sprite{ path, pos};
+	_ballSprite = new Sprite{ pos, path };
 	_ballSprite->loadSprite(window);
 	_ballSprite->Resize(50, 50);
 

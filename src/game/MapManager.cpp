@@ -3,25 +3,25 @@
 
 void MapManager::InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos)
 {
-	Sprite Sky = {   "res\\game\\Background\\skycolor.png", pos };
-	Sprite Moon = {  "res\\game\\Background\\moon.png", pos };
-	Sprite Water = { "res\\game\\Background\\watercolor.png", pos };
-	Sprite Hill = {  "res\\game\\Background\\backhill.png", pos };
+	Sprite Sky = {   pos, "res\\game\\Background\\skycolor.png" };
+	Sprite Moon = {  pos, "res\\game\\Background\\moon.png" };
+	Sprite Water = { pos, "res\\game\\Background\\watercolor.png" };
+	Sprite Hill = {  pos, "res\\game\\Background\\backhill.png" };
 
-	Sprite ReflectCloud = {       "res\\game\\Midground\\reflectcloud.png", pos };
-	Sprite ReflectEiffeiTower = { "res\\game\\Midground\\reflecteiffeltower.png", pos };
-	Sprite ReflectBuilding = {    "res\\game\\Midground\\reflectbuilding.png", pos };
-	Sprite ReflectRiverBank = {   "res\\game\\Midground\\reflectriverbank.png", pos };
+	Sprite ReflectCloud = {       pos, "res\\game\\Midground\\reflectcloud.png" };
+	Sprite ReflectEiffeiTower = { pos, "res\\game\\Midground\\reflecteiffeltower.png" };
+	Sprite ReflectBuilding = {    pos, "res\\game\\Midground\\reflectbuilding.png" };
+	Sprite ReflectRiverBank = {   pos, "res\\game\\Midground\\reflectriverbank.png" };
 
-	Sprite BackBuilding3 = { "res\\game\\Foreground\\backbuilding3.png", pos };
-	Sprite BackBuilding2 = { "res\\game\\Foreground\\backbuilding2.png", pos };
-	Sprite BackBuilding1 = { "res\\game\\Foreground\\backbuilding1.png", pos };
-	Sprite Cloud = {         "res\\game\\Foreground\\skycloud.png", pos };
-	Sprite EifelTower = {    "res\\game\\Foreground\\eifeltower.png", pos };
-	Sprite Building = {      "res\\game\\Foreground\\riversidebuilding.png", pos };
-	Sprite People = {        "res\\game\\Foreground\\riverbankwithpeople.png", pos };
-	Sprite Barge = {         "res\\game\\Foreground\\barge river.png", pos };
-	Sprite Forest = {        "res\\game\\Foreground\\frontforest.png", pos };
+	Sprite BackBuilding3 = { pos, "res\\game\\Foreground\\backbuilding3.png" };
+	Sprite BackBuilding2 = { pos, "res\\game\\Foreground\\backbuilding2.png" };
+	Sprite BackBuilding1 = { pos, "res\\game\\Foreground\\backbuilding1.png" };
+	Sprite Cloud = {         pos, "res\\game\\Foreground\\skycloud.png" };
+	Sprite EifelTower = {    pos, "res\\game\\Foreground\\eifeltower.png" };
+	Sprite Building = {      pos, "res\\game\\Foreground\\riversidebuilding.png" };
+	Sprite People = {        pos, "res\\game\\Foreground\\riverbankwithpeople.png" };
+	Sprite Barge = {         pos, "res\\game\\Foreground\\barge river.png" };
+	Sprite Forest = {        pos, "res\\game\\Foreground\\frontforest.png" };
 
 	backs.emplace_back(Sky); backs.emplace_back(Moon);
 	backs.emplace_back(Water); backs.emplace_back(Hill);

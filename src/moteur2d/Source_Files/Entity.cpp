@@ -14,7 +14,7 @@ void Entity::Draw(Window* window)
 void Entity::InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos)
 {
 	SetPos(pos);
-	_sprite = new Sprite(path, GetPos());
+	_sprite = new Sprite(GetPos(), path);
 	_sprite->loadSprite(window);
 
 	width = _sprite->GetWidth();

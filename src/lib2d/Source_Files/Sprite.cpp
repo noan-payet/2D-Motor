@@ -1,7 +1,7 @@
 #include "Header_Files/Sprite.h"
 #include "Header_Files/Window.h"
 
-Sprite::Sprite(std::string path, Position position, bool isSheet)
+Sprite::Sprite(Position position, std::string path, bool isSheet)
 	: _path(path), Position(position), isSpriteSheet(isSheet)
 {
 	_width = 0.f;
@@ -59,6 +59,12 @@ void Sprite::Draw(Window* window)
 		SDL_RenderTexture(window->_renderer, _texture, NULL, &rectShow);
 	else
 		SDL_RenderTexture(window->_renderer, _texture, &rect, &rectShow);
+}
+
+void Sprite::DrawLine(Window* window, Vector2f start, Vector2f end, int thickness)
+{
+	SDL_SetRenderDrawColor(window->_renderer, 255, 0, 0, 255);
+	SDL_RenderLine(window->_renderer, start.GetX(), start.GetY(), end.GetX(), end.GetY());
 }
 
 void Sprite::SetAlpha(int trans)

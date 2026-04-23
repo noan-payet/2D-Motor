@@ -3,7 +3,7 @@
 BallObject::BallObject(Position pos, Window* window)
 {
 	_ballEntity = new Entity{ pos };
-	_ballSprite = new Sprite{ "..\\..\\res\\moteur2d\\basketBall.png", pos };
+	_ballSprite = new Sprite{ pos, "..\\..\\res\\moteur2d\\basketBall.png" };
 	_ballSprite->Resize(WINDOW_WIDTH / 40, WINDOW_WIDTH / 40);
 	_ballSprite->loadSprite(window);
 	

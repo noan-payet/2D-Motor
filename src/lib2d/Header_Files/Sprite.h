@@ -19,9 +19,10 @@ private:
 	bool isSpriteSheet;
 
 public:
-	Sprite(std::string, Position position, bool isSpriteSheet = false);
+	Sprite(Position position, std::string path = "", bool isSpriteSheet = false);
 
 	void Draw(Window* window) override;
+	void DrawLine(Window* window, Vector2f start, Vector2f end, int thickness = 1);
 
 	void SetAlpha(int trans);
 	int GetAlpha() const { return _alpha; }

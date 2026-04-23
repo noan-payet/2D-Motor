@@ -4,7 +4,7 @@
 void Obstacle::InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos)
 {
 	SetPos(pos);
-	_sprite = new Sprite(path, GetPos());
+	_sprite = new Sprite(GetPos(), path);
 	_sprite->loadSprite(window);
 	_sprite->Resize(75.f, 95.f);
 
