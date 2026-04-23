@@ -1,10 +1,11 @@
 #include "MazeGenerator.h"
 
+#include "lib2d/Header_Files/Input.h"
+
 void MazeGenerator::InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos)
 {
 	SetPos(pos);
 	_sprite = new Sprite(GetPos());
-	_spriteResolve = new Sprite(Vector2f({ GetPos().GetX() + 70.f, GetPos().GetY() + 70.f}));
 
 	_width = _sprite->GetWidth();
 	_height = _sprite->GetHeight();
@@ -14,6 +15,22 @@ void MazeGenerator::InitEntity(Window* window, std::string path, float deltaTime
 
 void MazeGenerator::Update()
 {
+	Input& input = Input::getInstance();
+
+	float speed = 100.f;
+
+	if (input.isKeyHeld(SDLK_Z)) {
+		SetPos({ GetPos().GetX(), GetPos().GetY() + speed * _deltaTime });
+	}
+	else if (input.isKeyHeld(SDLK_S)) {
+		SetPos({ GetPos().GetX(), GetPos().GetY() - speed * _deltaTime });
+	}
+	else if (input.isKeyHeld(SDLK_Q)) {
+		SetPos({ GetPos().GetX() + speed * _deltaTime, GetPos().GetY() });
+	}
+	else if (input.isKeyHeld(SDLK_D)) {
+		SetPos({ GetPos().GetX() - speed * _deltaTime, GetPos().GetY() });
+	}
 }
 
 void MazeGenerator::Draw(Window* window)
@@ -30,18 +47,18 @@ void MazeGenerator::Draw(Window* window)
 			{
 			case 1:
 				// Draw hoizontal line
-				startPath = { _spriteResolve->GetPos().GetX() + col * lineSize, _spriteResolve->GetPos().GetY() + row * lineSize };
+				startPath = { GetPos().GetX() + col * lineSize, GetPos().GetY() + row * lineSize };
 				endPath = { startPath.GetX() + lineSize, startPath.GetY() };
 
-				_spriteResolve->DrawLine(window, startPath, endPath);
+				_sprite->DrawLine(window, startPath, endPath);
 				break;
 
 			case 2:
 				// Draw vertical line
-				startPath = { _spriteResolve->GetPos().GetX() + col * lineSize, _spriteResolve->GetPos().GetY() + row * lineSize };
+				startPath = { GetPos().GetX() + col * lineSize, GetPos().GetY() + row * lineSize };
 				endPath = { startPath.GetX(), startPath.GetY() + lineSize };
 
-				_spriteResolve->DrawLine(window, startPath, endPath);
+				_sprite->DrawLine(window, startPath, endPath);
 				break;
 			}
 		}

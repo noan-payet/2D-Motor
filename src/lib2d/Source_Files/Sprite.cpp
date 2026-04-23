@@ -13,6 +13,35 @@ Sprite::Sprite(Position position, std::string path, bool isSheet)
 	newSizeX = newSizeY = 0;
 }
 
+Uint8 Sprite::GetPixel(Window* window, int x, int y)
+{
+	if (!_texture)
+		return 0;
+
+	SDL_Rect rect = { x, y, 1, 1 };
+
+	// On récupère les pixels du renderer dans une surface
+	SDL_Surface* surface = SDL_RenderReadPixels(window->_renderer, &rect);
+
+	if (surface) {
+		// On accède aux données du pixel
+		Uint8 r, g, b, a;
+		Uint32* pixels = (Uint32*)surface->pixels;
+
+		// On décompose la couleur selon le format de la surface
+		SDL_GetRGBA(pixels[0], SDL_GetPixelFormatDetails(surface->format), NULL, &r, &g, &b, &a);
+
+		SDL_Log("Couleur du pixel : R:%d G:%d B:%d", r, g, b);
+
+		// Toujours libérer la surface après usage !
+		SDL_DestroySurface(surface);
+
+		return pixels[0];
+	}
+
+	return 0;
+}
+
 void Sprite::loadSprite(Window* window)
 {
 	_texture = IMG_LoadTexture(window->_renderer, _path.c_str());

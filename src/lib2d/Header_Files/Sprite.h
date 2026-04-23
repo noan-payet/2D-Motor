@@ -27,6 +27,8 @@ public:
 	void SetAlpha(int trans);
 	int GetAlpha() const { return _alpha; }
 
+	Uint8 GetPixel(Window* window, int x, int y);
+
 	void loadSprite(Window* window);
 
 	float GetWidth() const;

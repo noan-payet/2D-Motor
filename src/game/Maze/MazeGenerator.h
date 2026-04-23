@@ -23,8 +23,6 @@ private:
 
 	std::vector<std::vector<bool>> mazeGrid; // true for wall, false for path
 
-	Sprite* _spriteResolve = nullptr;
-
 public:
 	void GenerateMaze(int width, int height);
 };
