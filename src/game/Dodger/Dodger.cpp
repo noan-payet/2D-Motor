@@ -6,8 +6,8 @@ void Dodger::InitEntity(Window* window, std::string path, float deltaTime, Vecto
 	_sprite = new Sprite(GetPos(), path);
 	_sprite->loadSprite(window);
 
-	width = _sprite->GetWidth();
-	height = _sprite->GetHeight();
+	_width = _sprite->GetWidth();
+	_height = _sprite->GetHeight();
 
 	_spriteLife = new Sprite(GetHitbox(0.75f, 1.f), "res/game/Life.png", true);
 	_spriteLife->loadSprite(window);

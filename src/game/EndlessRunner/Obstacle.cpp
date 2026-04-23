@@ -8,8 +8,8 @@ void Obstacle::InitEntity(Window* window, std::string path, float deltaTime, Vec
 	_sprite->loadSprite(window);
 	_sprite->Resize(75.f, 95.f);
 
-	width = _sprite->GetWidth();
-	height = _sprite->GetHeight();
+	_width = _sprite->GetWidth();
+	_height = _sprite->GetHeight();
 
 	_deltaTime = deltaTime;
 }

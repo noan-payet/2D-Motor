@@ -6,8 +6,8 @@ void Skill_Tree::InitEntity(Window* window, std::string path, float deltaTime, V
 	_sprite = new Sprite(GetPos(), path);
 	_sprite->loadSprite(window);
 
-	width = _sprite->GetWidth();
-	height = _sprite->GetHeight();
+	_width = _sprite->GetWidth();
+	_height = _sprite->GetHeight();
 
 	_deltaTime = deltaTime;
 }

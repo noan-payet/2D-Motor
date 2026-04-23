@@ -7,8 +7,8 @@ void Clicker::InitEntity(Window* window, std::string path, float deltaTime, Vect
 	_sprite->loadSprite(window);
 	_sprite->SetAlpha(128);
 
-	width = _sprite->GetWidth();
-	height = _sprite->GetHeight();
+	_width = _sprite->GetWidth();
+	_height = _sprite->GetHeight();
 
 	_deltaTime = deltaTime;
 }

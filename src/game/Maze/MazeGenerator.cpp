@@ -6,8 +6,8 @@ void MazeGenerator::InitEntity(Window* window, std::string path, float deltaTime
 	_sprite = new Sprite(GetPos());
 	_spriteResolve = new Sprite(Vector2f({ GetPos().GetX() + 70.f, GetPos().GetY() + 70.f}));
 
-	width = _sprite->GetWidth();
-	height = _sprite->GetHeight();
+	_width = _sprite->GetWidth();
+	_height = _sprite->GetHeight();
 
 	_deltaTime = deltaTime;
 }
@@ -18,13 +18,9 @@ void MazeGenerator::Update()
 
 void MazeGenerator::Draw(Window* window)
 {
-	Vector2f startWall;
-	Vector2f endWall;
 
 	Vector2f startPath;
 	Vector2f endPath;
-
-	int lineSize = 140.f; // Calculate line size based on maze width
 
 	// Draw the paths based on the mazeGrid
 	for (int row = 0; row < mazeHeight - 1; ++row) {
@@ -50,78 +46,17 @@ void MazeGenerator::Draw(Window* window)
 			}
 		}
 	}
-
-	for (int row = 0; row < mazeHeight - 1; ++row) {
-
-		for (int col = 0; col < mazeWidth - 1; ++col) {
-
-			switch (paths[row][col])
-			{
-			case 1:
-				// Draw last vertical line
-				startPath = { _spriteResolve->GetPos().GetX() + (mazeWidth - 1) * lineSize, _spriteResolve->GetPos().GetY() + row * lineSize };
-				endPath = { startPath.GetX(), startPath.GetY() + lineSize };
-
-				_spriteResolve->DrawLine(window, startPath, endPath);
-				break;
-
-			case 2:
-				// Draw last horizontal line
-				startPath = { _spriteResolve->GetPos().GetX() + col * lineSize, _spriteResolve->GetPos().GetY() + (mazeHeight - 1) * lineSize };
-				endPath = { startPath.GetX() + lineSize, startPath.GetY() };
-
-				_spriteResolve->DrawLine(window, startPath, endPath);
-				break;
-			}
-		}
-	}
-
-	//// Draw the maze based on the mazeGrid
-	//for (int row = 0; row < mazeHeight; ++row) {
-	//	for (int col = 0; col < mazeWidth; ++col) {
-
-	//		if (mazeGrid[row][col] == true)
-	//		{
-	//			// Draw hoizontal line
-	//			startWall = { GetPos().GetX() + col * 140.f, GetPos().GetY() + row * 140.f };
-	//			endWall = { startWall.GetX() + 140.f, startWall.GetY() };
-
-	//			_sprite->DrawLine(window, startWall, endWall);
-
-	//			// Draw vertical line
-	//			startWall = { GetPos().GetX() + col * 140.f, GetPos().GetY() + row * 140.f };
-	//			endWall = { startWall.GetX(), startWall.GetY() + 140.f };
-
-	//			_sprite->DrawLine(window, startWall, endWall);
-	//		}
-	//	}
-	//}
-
-	//for (int row = 0; row < mazeHeight; ++row) {
-	//	for (int col = 0; col < mazeWidth; ++col) {
-
-	//		if (mazeGrid[mazeHeight - 1][mazeWidth - 1] == true)
-	//		{
-	//			// Draw last vertical line
-	//			startWall = { GetPos().GetX() + mazeWidth * 140.f, GetPos().GetY() + row * 140.f };
-	//			endWall = { startWall.GetX(), startWall.GetY() + 140.f };
-
-	//			_sprite->DrawLine(window, startWall, endWall);
-
-	//			// Draw last horizontal line
-	//			startWall = { GetPos().GetX() + col * 140.f, GetPos().GetY() + mazeHeight * 140.f };
-	//			endWall = { startWall.GetX() + 140.f, startWall.GetY() };
-
-	//			_sprite->DrawLine(window, startWall, endWall);
-	//		}
-	//	}
-	//}
 }
 
 void MazeGenerator::GenerateMaze(int width, int height)
 {
 	mazeWidth = width;
 	mazeHeight = height;
+
+	lineSize = 140.f;
+
+	_width = width * lineSize;
+	_height = height * lineSize;
 
 	mazeGrid.resize(mazeHeight, std::vector<bool>(mazeWidth, true)); // Initialize all cells as walls
 	paths.resize(mazeHeight, std::vector<int>(mazeWidth, 0)); // Initialize paths

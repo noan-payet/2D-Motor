@@ -11,7 +11,7 @@ class Entity : public Position, public Drawable
 protected:
 	Sprite* _sprite = nullptr;
 
-	float width = 0.f, height = 0.f;
+	float _width = 0.f, _height = 0.f;
 
 	int priority = 0;
 
@@ -35,11 +35,11 @@ public:
 
 	Sprite* GetSprite() { return _sprite; }
 
-	float GetWidth() { return width; }
-	float GetHeight() { return height; }
+	float GetWidth() { return _width; }
+	float GetHeight() { return _height; }
 
-	void SetWidth(float width)   { this->width = width; }
-	void SetHeight(float height) { this->height = height; }
+	void SetWidth(float width)   { this->_width = width; }
+	void SetHeight(float height) { this->_height = height; }
 
 	void ReScale(float w, float h);
 

@@ -11,8 +11,8 @@ void Runner::InitEntity(Window* window, std::string path, float deltaTime, Vecto
 	_sprite->loadSprite(window);
 	_sprite->Resize(120.f, 120.f);
 
-	width = _sprite->GetWidth();
-	height = _sprite->GetHeight();
+	_width = _sprite->GetWidth();
+	_height = _sprite->GetHeight();
 
 	_deltaTime = deltaTime;
 }

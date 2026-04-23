@@ -9,8 +9,8 @@ void SquareMob::InitEntity(Window* window, std::string path, float deltaTime, Ve
 	_sprite->loadSprite(window);
 	_sprite->Resize(_sprite->GetWidth() * 3, _sprite->GetHeight() * 3);
 
-	width = _sprite->GetWidth();
-	height = _sprite->GetHeight();
+	_width = _sprite->GetWidth();
+	_height = _sprite->GetHeight();
 
 	_deltaTime = deltaTime;
 

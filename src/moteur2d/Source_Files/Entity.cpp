@@ -17,8 +17,8 @@ void Entity::InitEntity(Window* window, std::string path, float deltaTime, Vecto
 	_sprite = new Sprite(GetPos(), path);
 	_sprite->loadSprite(window);
 
-	width = _sprite->GetWidth();
-	height = _sprite->GetHeight();
+	_width = _sprite->GetWidth();
+	_height = _sprite->GetHeight();
 }
 
 void Entity::ReScale(float w, float h)
@@ -30,12 +30,12 @@ void Entity::ReScale(float w, float h)
 
 Vector2f Entity::GetHitbox(float anchorX, float anchorY)
 {
-	return Vector2f({ GetPos().GetX() + width * anchorX, GetPos().GetY() + height * anchorY });
+	return Vector2f({ GetPos().GetX() + _width * anchorX, GetPos().GetY() + _height * anchorY });
 }
 
 void Entity::SetHitbox(Vector2f newPos, float anchorX, float anchorY)
 {
-	SetPos(Vector2f({ newPos.GetX() - width * anchorX, newPos.GetY() - height * anchorY}));
+	SetPos(Vector2f({ newPos.GetX() - _width * anchorX, newPos.GetY() - _height * anchorY}));
 	_sprite->SetPos(GetPos());
 }
 
