@@ -27,6 +27,9 @@ void SceneManager::ChooseScene()
 	std::cout << "Pour deplacer le personnage, vous devrez vous servir de votre souris.\n";
 	std::cout << "Click Droit pour prendre des photos et Echap pour quitter le jeu et avoir votre score.\n\n";
 
+	std::cout << "6 : Maze\n";
+	std::cout << "Pour deplacer le personnage, ses controles sont ZQSD.\n";
+
 	std::cout << "Choisis une scene a jouer : (1-" << (int)sceneList.size() << ")\n";
 	int choice;
 	std::cin >> choice;
