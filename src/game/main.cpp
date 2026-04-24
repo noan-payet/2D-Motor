@@ -8,6 +8,7 @@
 #include "game/Clicker/ClickerScene.h"
 //#include "game/ShootThemUp/Shoot_them_up.h"
 #include "game/Maze/MazeScene.h"
+#include "game/StrenghtPuzzle/StrenghtPuzzleScene.h"
 
 int main()
 {
@@ -21,6 +22,7 @@ int main()
 	DodgerScene* dodgerScene = new DodgerScene();
     ClickerScene* clicker = new ClickerScene();
 	MazeScene* mazeScene = new MazeScene();
+    StrenghtPuzzleScene* strenghtPuzzle = new StrenghtPuzzleScene();
 
     gameManager.AddScenes(shoot);
     gameManager.AddScenes(sceneball);
@@ -28,6 +30,7 @@ int main()
 	gameManager.AddScenes(dodgerScene);
     gameManager.AddScenes(clicker);
 	gameManager.AddScenes(mazeScene);
+    gameManager.AddScenes(strenghtPuzzle);
 
 	gameManager.ChooseMainScene();
 
