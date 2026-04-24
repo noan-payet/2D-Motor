@@ -5,6 +5,10 @@
 
 class MazeScene : public Scene
 {
+private:
+	int second = 0;
+	int secondBefore = 0;
+
 public:
 	void InitScene(Window* window) override;
 

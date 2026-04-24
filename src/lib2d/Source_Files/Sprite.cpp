@@ -20,13 +20,6 @@ Uint8 Sprite::GetPixel(Window* window, Vector2f pos, int squareSize)
 	// On récupère les pixels du renderer dans une surface
 	SDL_Surface* surface = SDL_RenderReadPixels(window->_renderer, &rect);
 
-	SDL_SetRenderDrawColor(window->_renderer, 255, 0, 0, 255);
-
-	const SDL_FRect rects = { pos.GetX(), pos.GetY(), squareSize, squareSize };
-	SDL_RenderFillRect(window->_renderer, &rects);
-
-	SDL_SetRenderDrawColor(window->_renderer, 0, 0, 0, 255);
-
 	if (surface) {
 		// On accède aux données du pixel
 		Uint8 r, g, b, a;
@@ -38,8 +31,6 @@ Uint8 Sprite::GetPixel(Window* window, Vector2f pos, int squareSize)
 			SDL_GetPixelFormatDetails(surface->format), 
 			NULL, 
 			&r, &g, &b, &a);
-
-		SDL_Log("Couleur du pixel : R:%d G:%d B:%d", r, g, b);
 
 		// Toujours libérer la surface après usage !
 		SDL_DestroySurface(surface);
@@ -98,9 +89,9 @@ void Sprite::Draw(Window* window)
 		SDL_RenderTexture(window->_renderer, _texture, &rect, &rectShow);
 }
 
-void Sprite::DrawLine(Window* window, Vector2f start, Vector2f end, int thickness)
+void Sprite::DrawLine(Window* window, Vector2f start, Vector2f end, Uint8 alpha)
 {
-	SDL_SetRenderDrawColor(window->_renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(window->_renderer, 255, 255, 255, alpha);
 	SDL_RenderLine(window->_renderer, start.GetX(), start.GetY(), end.GetX(), end.GetY());
 
 	SDL_SetRenderDrawColor(window->_renderer, 0, 0, 0, 255);

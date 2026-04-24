@@ -9,7 +9,7 @@ void MazeScene::InitScene(Window* window)
 {
 	MazeGenerator* mazeGen = CreateEntity<MazeGenerator>();
 
-	int mazeSize = 20;
+	int mazeSize = 50;
 	mazeGen->GenerateMaze(mazeSize, mazeSize);
 
 	float centerX = (WINDOW_WIDTH - mazeGen->GetWidth()) / 2.f;
@@ -25,12 +25,19 @@ void MazeScene::InitScene(Window* window)
 
 void MazeScene::UpdateScene(Window* window)
 {
+	second++;
+
+	if (second / 59 != secondBefore / 59)
+	{
+		secondBefore = second;
+		std::cout << "Second : " << second / 59 << std::endl;
+	}
+
 	ManInMaze* entity = GetEntity<ManInMaze>();
 	MazeGenerator* mazeGen = GetEntity<MazeGenerator>();
 
-	if (GetPixelOnScreen<Entity>(window, { entity->GetHitbox(0.f, 0.5f).GetX() - 4, entity->GetHitbox(0.f, 0.5f).GetY() }, 4) != 0)
+	if (GetPixelOnScreen<Entity>(window, { entity->GetHitbox(0.f, 0.5f).GetX() - 5, entity->GetHitbox(0.f, 0.5f).GetY() }, 4) != 0)
 	{
-		std::cout << "Left" << std::endl;
 		mazeGen->Collision(2, false);
 	}
 	else
@@ -47,9 +54,8 @@ void MazeScene::UpdateScene(Window* window)
 		mazeGen->Collision(3, true);
 	}
 
-	if (GetPixelOnScreen<Entity>(window, { entity->GetHitbox().GetX(), entity->GetHitbox(0.5f, 0.f).GetY() - 4 }, 4) != 0)
+	if (GetPixelOnScreen<Entity>(window, { entity->GetHitbox().GetX(), entity->GetHitbox(0.5f, 0.f).GetY() - 5 }, 4) != 0)
 	{
-		std::cout << "Up" << std::endl;
 		mazeGen->Collision(0, false);
 	}
 	else
@@ -64,5 +70,13 @@ void MazeScene::UpdateScene(Window* window)
 	else
 		{
 		mazeGen->Collision(1, true);
+	}
+
+	if (entity->IsColliding(mazeGen) == false)
+	{
+		std::cout << "\n Bravo! \n"
+			"You have solved the maze in " << second / 59 << "seconds!\n";
+
+		QuitScene();
 	}
 }

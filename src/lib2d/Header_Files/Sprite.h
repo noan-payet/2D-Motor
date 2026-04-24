@@ -22,7 +22,7 @@ public:
 	Sprite(Position position, std::string path = "", bool isSpriteSheet = false);
 
 	void Draw(Window* window) override;
-	void DrawLine(Window* window, Vector2f start, Vector2f end, int thickness = 1);
+	void DrawLine(Window* window, Vector2f start, Vector2f end, Uint8 alpha = 255);
 
 	void SetAlpha(int trans);
 	int GetAlpha() const { return _alpha; }

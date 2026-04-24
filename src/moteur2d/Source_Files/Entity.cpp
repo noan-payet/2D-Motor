@@ -48,7 +48,7 @@ bool Entity::IsColliding(Entity* otherEntity)
 		GetHitbox(0.5f, 1.f).GetY() >= otherEntity->GetHitbox(0.5f, 0.f).GetY() &&                   // r1 top edge past r2 bottom
 		GetHitbox(0.5f, 0.f).GetY() <= otherEntity->GetHitbox(0.5f, 1.f).GetY())        // r1 bottom edge past r2 top
 	{
-		std::cout << "Collision detected!" << std::endl;
+		//std::cout << "Collision detected!" << std::endl;
 		return true;
 	}
 

@@ -7,9 +7,6 @@ void MazeGenerator::InitEntity(Window* window, std::string path, float deltaTime
 	SetPos(pos);
 	_sprite = new Sprite(GetPos());
 
-	_width = _sprite->GetWidth();
-	_height = _sprite->GetHeight();
-
 	_deltaTime = deltaTime;
 }
 
@@ -48,7 +45,9 @@ void MazeGenerator::Draw(Window* window)
 				startPath = { GetPos().GetX() + col * lineSize, GetPos().GetY() + row * lineSize };
 				endPath = { startPath.GetX() + lineSize, startPath.GetY() };
 
-				_sprite->DrawLine(window, startPath, endPath);
+				if (startPath.GetX() > 1266 / 4 && endPath.GetX() < 1266 * 3/4 && 
+					startPath.GetY() > 800 / 4 && endPath.GetY() < 800 * 3 / 4)
+					_sprite->DrawLine(window, startPath, endPath, 255);
 				break;
 
 			case 2:
@@ -56,7 +55,9 @@ void MazeGenerator::Draw(Window* window)
 				startPath = { GetPos().GetX() + col * lineSize, GetPos().GetY() + row * lineSize };
 				endPath = { startPath.GetX(), startPath.GetY() + lineSize };
 
-				_sprite->DrawLine(window, startPath, endPath);
+				if (startPath.GetY() > 800 / 4 && endPath.GetY() < 800 * 3/4 && 
+					startPath.GetX() > 1266 / 4 && endPath.GetX() < 1266 * 3 / 4)
+					_sprite->DrawLine(window, startPath, endPath, 255);
 				break;
 			}
 		}
