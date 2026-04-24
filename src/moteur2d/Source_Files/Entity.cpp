@@ -20,6 +20,8 @@ void Entity::InitEntity(Window* window, std::string path, float deltaTime, Vecto
 
 	_width = _sprite->GetWidth();
 	_height = _sprite->GetHeight();
+
+	m_deltaTime = deltaTime;
 }
 
 void Entity::ReScale(float w, float h)
@@ -53,4 +55,37 @@ bool Entity::IsColliding(Entity* otherEntity)
 	}
 
 	return false;
+}
+
+bool* Entity::GetCollisionSide(Entity* otherEntity)
+{
+	// On calcule les distances de pénétration
+	float overlapLeft = GetHitbox(0.f).GetX() - otherEntity->GetHitbox(1.f).GetX();
+	float overlapRight = otherEntity->GetHitbox(0.f).GetX() - GetHitbox(1.f).GetX();
+	float overlapTop = GetHitbox(0.5f, 0.f).GetY() - otherEntity->GetHitbox(0.5f, 1.f).GetY();
+	float overlapBottom = otherEntity->GetHitbox(0.5f, 0.f).GetY() - GetHitbox(0.5f, 1.f).GetY();
+
+	overlapLeft *= overlapLeft;
+	overlapRight *= overlapRight;
+	overlapTop *= overlapTop;
+	overlapBottom *= overlapBottom;
+
+	bool side[4] = { true, true, true, true };
+
+	// On cherche la plus petite valeur positive
+	float minOverlap = std::min({ overlapLeft, overlapRight, overlapTop, overlapBottom });
+
+	if (minOverlap == overlapLeft)   /* Collision par la GAUCHE de l'obstacle */
+		side[2] = false;
+
+	if (minOverlap == overlapRight)  /* Collision par la DROITE de l'obstacle */
+		side[3] = false;
+
+	if (minOverlap == overlapTop)    /* Collision par le HAUT de l'obstacle */
+		side[0] = false;
+
+	if (minOverlap == overlapBottom) /* Collision par le BAS de l'obstacle */
+		side[1] = false;
+
+	return side;
 }

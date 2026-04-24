@@ -12,6 +12,7 @@ protected:
 	Sprite* _sprite = nullptr;
 
 	float _width = 0.f, _height = 0.f;
+	float m_deltaTime = 0.f;
 
 	int priority = 0;
 
@@ -47,6 +48,7 @@ public:
 	void SetHitbox(Vector2f newPos, float anchorX = 0.5f, float anchorY = 0.5f);
 
 	bool IsColliding(Entity* otherEntity);
+	bool* GetCollisionSide(Entity* otherEntity);
 };
 
 #endif

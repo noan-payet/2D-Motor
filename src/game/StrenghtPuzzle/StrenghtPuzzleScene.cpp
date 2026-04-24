@@ -34,11 +34,13 @@ void StrenghtPuzzleScene::InitScene(Window* window)
 	}
 
 	for (int row = 0; row < level.size(); ++row)
+		for (int col = 0; col < level[row].size(); ++col)
+			CreateEntity<Entity>()->InitEntity(window, "res\\game\\Puzzle\\Ground.png", TARGET_DELTA_TIME, Vector2f({ col * 17.f, row * 17.f }));
+
+	for (int row = 0; row < level.size(); ++row)
 	{
 		for (int col = 0; col < level[row].size(); ++col)
 		{
-			CreateEntity<Entity>();
-
 			switch (level[row][col])
 			{
 			case 'W':
@@ -59,8 +61,37 @@ void StrenghtPuzzleScene::InitScene(Window* window)
 			}
 		}
 	}
+
+	GetEntity<StrongMan>()->SetPriority(-1);
 }
 
 void StrenghtPuzzleScene::UpdateScene(Window* window)
 {
+	StrongMan* player = GetEntity<StrongMan>();
+
+	bool renitialize[4] = { true, true, true, true };
+	player->Collision(renitialize);
+
+	//COLLISION
+	for (auto& w : GetEntities<Wall>())
+	{
+		if (player->IsColliding(w))
+		{
+			player->Collision(player->GetCollisionSide(w));
+		}
+	}
+
+	for (auto& m : GetEntities<Movable_Object>())
+	{
+		if (player->IsColliding(m))
+		{
+			player->Collision(player->GetCollisionSide(m));
+		}
+	}
+
+	if (player->IsColliding(GetEntity<ExitLevel>()))
+	{
+		std::cout << "Vous avez finit le level !\n";
+		QuitScene();
+	}
 }
