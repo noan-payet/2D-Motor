@@ -9,6 +9,9 @@ public:
 	void InitScene(Window* window) override;
 
 	void UpdateScene(Window* window) override;
+
+private:
+	bool DEBUG = true;
 };
 
 #endif // !_H__PUZZLESCENE
