@@ -8,7 +8,8 @@ void Entity::Update()
 
 void Entity::Draw(Window* window)
 {
-	_sprite->Draw(window);
+	if (_sprite != nullptr)
+		_sprite->Draw(window);
 }
 
 void Entity::InitEntity(Window* window, std::string path, float deltaTime, Vector2f pos)
@@ -23,9 +24,10 @@ void Entity::InitEntity(Window* window, std::string path, float deltaTime, Vecto
 
 void Entity::ReScale(float w, float h)
 {
-	SetWidth(w);
-	SetHeight(h);
 	_sprite->Resize(w, h);
+
+	SetWidth(_sprite->GetWidth());
+	SetHeight(_sprite->GetHeight());
 }
 
 Vector2f Entity::GetHitbox(float anchorX, float anchorY)

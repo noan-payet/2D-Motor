@@ -13,30 +13,38 @@ Sprite::Sprite(Position position, std::string path, bool isSheet)
 	newSizeX = newSizeY = 0;
 }
 
-Uint8 Sprite::GetPixel(Window* window, int x, int y)
+Uint8 Sprite::GetPixel(Window* window, Vector2f pos, int squareSize)
 {
-	if (!_texture)
-		return 0;
-
-	SDL_Rect rect = { x, y, 1, 1 };
+	SDL_Rect rect = { pos.GetX(), pos.GetY(), squareSize, squareSize };
 
 	// On récupère les pixels du renderer dans une surface
 	SDL_Surface* surface = SDL_RenderReadPixels(window->_renderer, &rect);
+
+	SDL_SetRenderDrawColor(window->_renderer, 255, 0, 0, 255);
+
+	const SDL_FRect rects = { pos.GetX(), pos.GetY(), squareSize, squareSize };
+	SDL_RenderFillRect(window->_renderer, &rects);
+
+	SDL_SetRenderDrawColor(window->_renderer, 0, 0, 0, 255);
 
 	if (surface) {
 		// On accède aux données du pixel
 		Uint8 r, g, b, a;
 		Uint32* pixels = (Uint32*)surface->pixels;
+		Uint32 pixelValue = pixels[0];
 
 		// On décompose la couleur selon le format de la surface
-		SDL_GetRGBA(pixels[0], SDL_GetPixelFormatDetails(surface->format), NULL, &r, &g, &b, &a);
+		SDL_GetRGBA(pixelValue, 
+			SDL_GetPixelFormatDetails(surface->format), 
+			NULL, 
+			&r, &g, &b, &a);
 
 		SDL_Log("Couleur du pixel : R:%d G:%d B:%d", r, g, b);
 
 		// Toujours libérer la surface après usage !
 		SDL_DestroySurface(surface);
 
-		return pixels[0];
+		return r, g, b;
 	}
 
 	return 0;

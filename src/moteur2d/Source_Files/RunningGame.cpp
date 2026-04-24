@@ -36,8 +36,8 @@ void RunningGame::Loop()
 
 		_window.clear();
 
-		_manager->GetPrincipalScene()->UpdateScene(&_window);
 		_manager->GetPrincipalScene()->Draw(&_window);
+		_manager->GetPrincipalScene()->UpdateScene(&_window);
 
 		_window.Present();
 

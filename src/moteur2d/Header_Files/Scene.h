@@ -37,6 +37,9 @@ public:
 
 	template<class T>
 	std::vector<T*> GetEntities();
+
+	template<class T>
+	Uint8 GetPixelOnScreen(Window* window, Vector2f pos, int squareSize);
 };
 
 template<class T>
@@ -83,6 +86,16 @@ inline std::vector<T*> Scene::GetEntities()
 	}
 
 	return entitiesList;
+}
+
+template<class T>
+inline Uint8 Scene::GetPixelOnScreen(Window* window, Vector2f pos, int squareSize)
+{
+	for (Entity* e : entityList) {
+		if (T* t = dynamic_cast<T*>(e)) {
+			return t->GetSprite()->GetPixel(window, pos, squareSize);
+		}
+	}
 }
 
 #endif // !SCENE

@@ -17,18 +17,16 @@ void MazeGenerator::Update()
 {
 	Input& input = Input::getInstance();
 
-	float speed = 100.f;
-
-	if (input.isKeyHeld(SDLK_Z)) {
+	if (input.isKeyHeld(SDLK_Z) && direction[0]) {
 		SetPos({ GetPos().GetX(), GetPos().GetY() + speed * _deltaTime });
 	}
-	else if (input.isKeyHeld(SDLK_S)) {
+	else if (input.isKeyHeld(SDLK_S) && direction[1]) {
 		SetPos({ GetPos().GetX(), GetPos().GetY() - speed * _deltaTime });
 	}
-	else if (input.isKeyHeld(SDLK_Q)) {
+	if (input.isKeyHeld(SDLK_Q) && direction[2]) {
 		SetPos({ GetPos().GetX() + speed * _deltaTime, GetPos().GetY() });
 	}
-	else if (input.isKeyHeld(SDLK_D)) {
+	else if (input.isKeyHeld(SDLK_D) && direction[3]) {
 		SetPos({ GetPos().GetX() - speed * _deltaTime, GetPos().GetY() });
 	}
 }
@@ -96,4 +94,9 @@ void MazeGenerator::GenerateMaze(int width, int height)
 			}
 		}
 	}
+}
+
+void MazeGenerator::Collision(int number, bool b)
+{
+	direction[number] = b;
 }
