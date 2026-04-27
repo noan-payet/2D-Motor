@@ -17,8 +17,11 @@ void Window::Present() const
 void Window::CreateOurWindow(std::string title, int windowWidth, int windowHeight)
 {
 	SDL_Init(SDL_INIT_VIDEO);
-	_window = SDL_CreateWindow(title.c_str(), windowWidth, windowHeight, SDL_WINDOW_OPENGL);
+	_window = SDL_CreateWindow(title.c_str(), windowWidth, windowHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 	_renderer = SDL_CreateRenderer(_window, NULL);
+
+	SDL_SetWindowMinimumSize(_window, 320, 240);
+	SDL_SetWindowMaximumSize(_window, 1920, 1080);
 }
 
 bool Window::isOpen()

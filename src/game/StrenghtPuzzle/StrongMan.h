@@ -9,7 +9,7 @@ public:
 	void Update() override;
 
 private:
-	float speed = 50.f;
+	float speed = 150.f;
 	bool direction[4] = { true, true, true, true }; // up, down, left, right
 
 	bool collision;

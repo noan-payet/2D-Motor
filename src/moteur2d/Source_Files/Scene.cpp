@@ -34,3 +34,11 @@ void Scene::UpdateAll()
 		e->Update();
 	}
 }
+
+void Scene::ReScaleAllEnemy(float scale)
+{
+	for (auto& e : entityList)
+	{
+		e->ReScale(e->GetWidth() * scale, e->GetHeight() * scale);
+	}
+}

@@ -53,3 +53,7 @@ Vector2f Vector2f::operator+(const Vector2f& _right) {
 Vector2f Vector2f::operator*(float _right) {
     return Vector2f(_x * _right, _y * _right);
 }
+
+Vector2f Vector2f::operator/(float _right) {
+    return Vector2f(_x / _right, _y / _right);
+}

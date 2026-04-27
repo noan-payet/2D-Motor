@@ -29,6 +29,7 @@ public:
 	int GetAlpha() const { return _alpha; }
 
 	Uint8 GetPixel(Window* window, Vector2f pos, int squareSize = 1);
+	SDL_Texture* GetTexture() const { return _texture; }
 
 	void loadSprite(Window* window);
 

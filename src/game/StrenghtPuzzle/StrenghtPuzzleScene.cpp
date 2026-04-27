@@ -19,9 +19,9 @@ void StrenghtPuzzleScene::InitScene(Window* window)
 		"res\\game\\Puzzle\\level\\level3.txt"
 	};
 
-	std::ifstream level3(levelPath[levelIndex]);
+	std::ifstream levels(levelPath[levelIndex]);
 
-	if (!level3.is_open())
+	if (!levels.is_open())
 	{
 		std::cout << "Erreur d'ouverture !\n";
 		return;
@@ -30,8 +30,10 @@ void StrenghtPuzzleScene::InitScene(Window* window)
 	std::vector<std::string> level;
 	std::string line;
 
-	while (std::getline(level3, line))
+	while (std::getline(levels, line))
 		level.push_back(line); // On ajoute la ligne au tableau
+
+	levels.close();
 
 	if (DEBUG)
 	{
@@ -40,61 +42,73 @@ void StrenghtPuzzleScene::InitScene(Window* window)
 			std::cout << l << std::endl;
 	}
 
+	float scale = 5.f;
+
 	for (int row = 0; row < level.size(); ++row)
 		for (int col = 0; col < level[row].size(); ++col)
 		{
-			CreateEntity<Entity>()->InitEntity(window, "res\\game\\Puzzle\\Ground.png", TARGET_DELTA_TIME, Vector2f({ col * 17.f, row * 17.f }));
+			Vector2f spawn = Vector2f({ col * 17.f * scale, row * 17.f * scale });
+
+			CreateEntity<Entity>()->InitEntity(window, "res\\game\\Puzzle\\Ground.png", TARGET_DELTA_TIME, spawn);
 
 			if (level[row][col] != 'W')
 			{
 				Entity* teleport = CreateEntity<Entity>();
-				teleport->InitEntity(window, "", TARGET_DELTA_TIME, Vector2f({ col * 17.f, row * 17.f }));
+				teleport->InitEntity(window, "", TARGET_DELTA_TIME, spawn);
 
-				teleport->SetWidth(4.f);
-				teleport->SetHeight(4.f);
+				teleport->ReScale(4.f, 4.f);
 
-				teleport->SetHitbox(Vector2f({ col * 17.f + 8.5f, row * 17.f + 8.5f }));
+				Vector2f dSpawn = spawn.operator+({ 17.f, 17.f });
+
+				teleport->SetHitbox({ 
+					dSpawn.GetX() + 4,
+					dSpawn.GetY()}
+					);
 
 				teleport->SetType("Teleport");
 				teleport->SetPriority(-1);
+
+				//teleport->SetDebug(true);
 			}
 		}
+
+	StrongMan* player = nullptr;
 
 	for (int row = 0; row < level.size(); ++row)
 	{
 		for (int col = 0; col < level[row].size(); ++col)
 		{
 			Movable_Object* movable = nullptr;
+			Vector2f spawn = Vector2f({ col * 17.f * scale, row * 17.f * scale });
 
 			switch (level[row][col])
 			{
 			case 'W':
-				CreateEntity<Wall>()->InitEntity(window, "res\\game\\Puzzle\\Wall.png", TARGET_DELTA_TIME, Vector2f({ col * 17.f, row * 17.f }));
+				CreateEntity<Wall>()->InitEntity(window, "res\\game\\Puzzle\\Wall.png", TARGET_DELTA_TIME, spawn);
 				break;
 
 			case 'E':
-				CreateEntity<ExitLevel>()->InitEntity(window, "res\\game\\Puzzle\\Exit\\exit.png", TARGET_DELTA_TIME, Vector2f({ col * 17.f - 1, row * 17.f - 8 }));
+				CreateEntity<ExitLevel>()->InitEntity(window, "res\\game\\Puzzle\\Exit\\exit.png", TARGET_DELTA_TIME, Vector2f({ col * 17.f * scale - 1 * scale, row * 17.f * scale - 8 * scale }));
 				break;
 
 			case 'R':
 				movable = CreateEntity<Movable_Object>();
-				movable->InitEntity(window, "res\\game\\Puzzle\\Movable_Element\\Rock.png", TARGET_DELTA_TIME, Vector2f({ col * 17.f, row * 17.f }));
+				movable->InitEntity(window, "res\\game\\Puzzle\\Movable_Element\\Rock.png", TARGET_DELTA_TIME, spawn);
 				break;
 
 			case 'P':
-				CreateEntity<StrongMan>()->InitEntity(window, "res\\game\\Puzzle\\Player\\player_gen_3.png", TARGET_DELTA_TIME, Vector2f({ col * 17.f, row * 17.f }));
-				GetEntity<StrongMan>()->SetHeigher(10.5f);
-				GetEntity<StrongMan>()->SetWighter(10.5f);
+				CreateEntity<StrongMan>()->InitEntity(window, "res\\game\\Puzzle\\Player\\player_gen_3.png", TARGET_DELTA_TIME, spawn);
+				player = GetEntity<StrongMan>();
 				break;
 			}
 		}
 	}
 
-	/*for (auto& a : GetEntities<Entity>())
-	{
-		a->ReScale(a->GetWidth() * 2, a->GetHeight() * 2);
-		a->SetPos(Vector2f({ a->GetPos().GetX() * 2, a->GetPos().GetY() * 2 }));
-	}*/
+	ReScaleAllEnemy(scale);
+
+	player->SetHeigher(player->GetHeight() / 2);
+	player->SetWighter(player->GetWidth() / 3);
+	player->SetDebug(true);
 
 	GetEntity<StrongMan>()->SetPriority(-1);
 }

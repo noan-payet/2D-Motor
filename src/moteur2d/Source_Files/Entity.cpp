@@ -39,7 +39,7 @@ void Entity::DrawHitbox(Window* window, Uint8 alpha)
 
 void Entity::ReScale(float w, float h)
 {
-	if (_sprite != nullptr)
+	if (_sprite->GetTexture() != NULL)
 	{
 		_sprite->Resize(w, h);
 
