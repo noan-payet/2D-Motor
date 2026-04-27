@@ -97,6 +97,16 @@ void Sprite::DrawLine(Window* window, Vector2f start, Vector2f end, Uint8 alpha)
 	SDL_SetRenderDrawColor(window->_renderer, 0, 0, 0, 255);
 }
 
+void Sprite::DrawRect(Window* window, Vector2f pos, float w, float h, Uint8 alpha)
+{
+	SDL_SetRenderDrawColor(window->_renderer, 255, 255, 255, alpha);
+
+	SDL_FRect rect = { pos.GetX(), pos.GetY(), w, h };
+	SDL_RenderRect(window->_renderer, &rect);
+
+	SDL_SetRenderDrawColor(window->_renderer, 0, 0, 0, 255);
+}
+
 void Sprite::SetAlpha(int trans)
 {
 	_alpha = trans;

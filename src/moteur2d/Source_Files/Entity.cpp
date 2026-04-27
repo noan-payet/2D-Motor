@@ -24,23 +24,48 @@ void Entity::InitEntity(Window* window, std::string path, float deltaTime, Vecto
 	m_deltaTime = deltaTime;
 }
 
+void Entity::DrawHitbox(Window* window, Uint8 alpha)
+{
+	if (DEBUG)
+	{
+		_sprite->DrawRect(window,
+			Vector2f{
+				GetPos().GetX() + widther / 2,
+				GetPos().GetY() + higher
+			},
+			_width, _height, alpha);
+	}
+}
+
 void Entity::ReScale(float w, float h)
 {
-	_sprite->Resize(w, h);
+	if (_sprite != nullptr)
+	{
+		_sprite->Resize(w, h);
 
-	SetWidth(_sprite->GetWidth());
-	SetHeight(_sprite->GetHeight());
+		SetWidth(_sprite->GetWidth());
+		SetHeight(_sprite->GetHeight());
+	}
+	else
+	{
+		SetWidth(w);
+		SetHeight(h);
+	}
 }
 
 Vector2f Entity::GetHitbox(float anchorX, float anchorY)
 {
-	return Vector2f({ GetPos().GetX() + _width * anchorX, GetPos().GetY() + _height * anchorY });
+	return Vector2f({ GetPos().GetX() + _width * anchorX + widther / 2, GetPos().GetY() + _height * anchorY + higher });
 }
 
 void Entity::SetHitbox(Vector2f newPos, float anchorX, float anchorY)
 {
 	SetPos(Vector2f({ newPos.GetX() - _width * anchorX, newPos.GetY() - _height * anchorY}));
-	_sprite->SetPos(GetPos());
+
+	_sprite->SetPos(Vector2f{
+				GetPos().GetX() - widther,
+				GetPos().GetY() - higher
+	});
 }
 
 bool Entity::IsColliding(Entity* otherEntity)
@@ -57,12 +82,12 @@ bool Entity::IsColliding(Entity* otherEntity)
 	return false;
 }
 
-bool* Entity::GetCollisionSide(Entity* otherEntity)
+std::vector<bool> Entity::GetCollisionSide(Entity* otherEntity)
 {
 	// On calcule les distances de pénétration
-	float overlapLeft = GetHitbox(0.f).GetX() - otherEntity->GetHitbox(1.f).GetX();
+	float overlapLeft = otherEntity->GetHitbox(1.f).GetX() - GetHitbox(0.f).GetX();
 	float overlapRight = otherEntity->GetHitbox(0.f).GetX() - GetHitbox(1.f).GetX();
-	float overlapTop = GetHitbox(0.5f, 0.f).GetY() - otherEntity->GetHitbox(0.5f, 1.f).GetY();
+	float overlapTop = otherEntity->GetHitbox(0.5f, 1.f).GetY() - GetHitbox(0.5f, 0.f).GetY();
 	float overlapBottom = otherEntity->GetHitbox(0.5f, 0.f).GetY() - GetHitbox(0.5f, 1.f).GetY();
 
 	overlapLeft *= overlapLeft;
@@ -70,7 +95,7 @@ bool* Entity::GetCollisionSide(Entity* otherEntity)
 	overlapTop *= overlapTop;
 	overlapBottom *= overlapBottom;
 
-	bool side[4] = { true, true, true, true };
+	std::vector<bool> side = { true, true, true, true };
 
 	// On cherche la plus petite valeur positive
 	float minOverlap = std::min({ overlapLeft, overlapRight, overlapTop, overlapBottom });

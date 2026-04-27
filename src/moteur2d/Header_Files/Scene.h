@@ -18,6 +18,7 @@ public:
 	virtual void InitScene(Window* window) {}
 
 	void Draw(Window* window) override;
+	void DrawDebug(Window* window, Uint8 alpha = 255);
 
 	void UpdateAll();
 	virtual void UpdateScene(Window* window) {}
@@ -34,6 +35,8 @@ public:
 
 	template<class T>
 	void EraseEntity(T* entity);
+
+	void EraseAllEntities() { entityList.clear(); }
 
 	template<class T>
 	std::vector<T*> GetEntities();

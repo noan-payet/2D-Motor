@@ -12,8 +12,15 @@ private:
 	float speed = 50.f;
 	bool direction[4] = { true, true, true, true }; // up, down, left, right
 
+	bool collision;
+
 public:
-	void Collision(bool* side);
+	void Collision(std::vector<bool>);
+
+	void Push(Entity* otherEntity, std::vector<bool> side);
+
+	bool IsMoving() const { return collision; }
+	void SetIsMoving(bool moving) { collision = moving; }
 };
 
 #endif // !_H__STRONGMAN

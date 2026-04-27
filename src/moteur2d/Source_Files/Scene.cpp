@@ -19,6 +19,14 @@ void Scene::Draw(Window* window)
 	}
 }
 
+void Scene::DrawDebug(Window* window, Uint8 alpha)
+{
+	for (auto& e : entityList)
+	{
+		e->DrawHitbox(window, alpha);
+	}
+}
+
 void Scene::UpdateAll()
 {
 	for (auto& e : entityList)

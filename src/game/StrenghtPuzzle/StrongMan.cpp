@@ -22,8 +22,18 @@ void StrongMan::Update()
 	_sprite->SetPos(GetPos());
 }
 
-void StrongMan::Collision(bool* side)
+void StrongMan::Collision(std::vector<bool> side)
 {
 	for (int i = 0; i < 4; ++i)
 		direction[i] = side[i];
+}
+
+void StrongMan::Push(Entity* otherEntity, std::vector<bool> side)
+{
+	int sideY = side[0] - side[1];
+	int sideX = side[3] - side[2];
+
+	otherEntity->SetPos({ 
+		otherEntity->GetPos().GetX() + sideX * speed * m_deltaTime,
+		otherEntity->GetPos().GetY() + sideY * speed * m_deltaTime });
 }

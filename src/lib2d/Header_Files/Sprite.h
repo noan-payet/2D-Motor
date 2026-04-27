@@ -23,6 +23,7 @@ public:
 
 	void Draw(Window* window) override;
 	void DrawLine(Window* window, Vector2f start, Vector2f end, Uint8 alpha = 255);
+	void DrawRect(Window* window, Vector2f pos, float w, float h, Uint8 alpha = 255);
 
 	void SetAlpha(int trans);
 	int GetAlpha() const { return _alpha; }

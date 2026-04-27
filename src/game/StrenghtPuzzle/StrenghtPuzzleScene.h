@@ -12,6 +12,9 @@ public:
 
 private:
 	bool DEBUG = true;
+
+	std::vector<std::string> levelPath;
+	int levelIndex = 0;
 };
 
 #endif // !_H__PUZZLESCENE
