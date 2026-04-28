@@ -196,8 +196,8 @@ void StrenghtPuzzleScene::UpdateScene(Window* window)
 			if (levelIndex >= levelPath.size())
 			{
 				std::cout << "\n Vous avez finit tous les levels !\n";
-				std::cout << " Vous avez besoin de " << reset << " resets !\n";
-				levelIndex = 0;
+				std::cout << " Vous avez eu besoin de " << reset << " resets !\n";
+				reset = levelIndex = 0;
 				QuitScene();
 				return;
 			}
