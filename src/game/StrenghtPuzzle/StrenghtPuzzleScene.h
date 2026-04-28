@@ -11,10 +11,12 @@ public:
 	void UpdateScene(Window* window) override;
 
 private:
-	bool DEBUG = true;
+	bool DEBUG = false;
 
 	std::vector<std::string> levelPath;
 	int levelIndex = 0;
+
+	int reset = 0;
 };
 
 #endif // !_H__PUZZLESCENE

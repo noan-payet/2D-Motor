@@ -35,7 +35,7 @@ void Scene::UpdateAll()
 	}
 }
 
-void Scene::ReScaleAllEnemy(float scale)
+void Scene::ReScaleAllEntity(float scale)
 {
 	for (auto& e : entityList)
 	{

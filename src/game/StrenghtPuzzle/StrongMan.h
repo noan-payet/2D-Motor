@@ -17,7 +17,7 @@ private:
 public:
 	void Collision(std::vector<bool>);
 
-	void Push(Entity* otherEntity, std::vector<bool> side);
+	bool Push();
 
 	bool IsMoving() const { return collision; }
 	void SetIsMoving(bool moving) { collision = moving; }

@@ -27,7 +27,7 @@ public:
 	void QuitScene() { entityList.clear(); _isRunning = false; }
 	bool isQuitting() { return _isRunning; }
 
-	void ReScaleAllEnemy(float scale);
+	void ReScaleAllEntity(float scale);
 
 	template<class T>
 	T* CreateEntity();

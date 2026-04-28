@@ -47,7 +47,7 @@ void Sprite::loadSprite(Window* window)
 
 	if (!_texture)
 	{
-		std::cout << "Texture has not load : " << SDL_GetError() << std::endl;
+		//std::cout << "Texture has not load : " << SDL_GetError() << std::endl;
 	}
 
 	SDL_GetTextureSize(_texture, &_width, &_height);

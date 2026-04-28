@@ -28,7 +28,12 @@ void SceneManager::ChooseScene()
 	std::cout << "Click Droit pour prendre des photos et Echap pour quitter le jeu et avoir votre score.\n\n";
 
 	std::cout << "6 : Maze\n";
+	std::cout << "Pour deplacer le personnage, ses controles sont ZQSD.\n\n";
+
+	std::cout << "7 : Puzzle a la stetosterone\n";
 	std::cout << "Pour deplacer le personnage, ses controles sont ZQSD.\n";
+	std::cout << "Pour deplacer les rochers, appuyez sur Espace.\n";
+	std::cout << "Pour renitialiser le niveau, appuyez sur BackSpace (le bouton au-dessus de Entree).\n\n";
 
 	std::cout << "Choisis une scene a jouer : (1-" << (int)sceneList.size() << ")\n";
 	int choice;

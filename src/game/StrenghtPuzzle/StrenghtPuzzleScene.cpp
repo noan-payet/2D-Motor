@@ -94,6 +94,7 @@ void StrenghtPuzzleScene::InitScene(Window* window)
 			case 'R':
 				movable = CreateEntity<Movable_Object>();
 				movable->InitEntity(window, "res\\game\\Puzzle\\Movable_Element\\Rock.png", TARGET_DELTA_TIME, spawn);
+				//movable->SetDebug(true);
 				break;
 
 			case 'P':
@@ -104,11 +105,17 @@ void StrenghtPuzzleScene::InitScene(Window* window)
 		}
 	}
 
-	ReScaleAllEnemy(scale);
+	ReScaleAllEntity(scale);
 
 	player->SetHeigher(player->GetHeight() / 2);
 	player->SetWighter(player->GetWidth() / 3);
-	player->SetDebug(true);
+	//player->SetDebug(true);
+
+	for (auto& m : GetEntities<Movable_Object>())
+	{
+		m->SetWighter(4);
+		m->SetHeigher(4);
+	}
 
 	GetEntity<StrongMan>()->SetPriority(-1);
 }
@@ -137,20 +144,23 @@ void StrenghtPuzzleScene::UpdateScene(Window* window)
 		{
 			player->Collision(player->GetCollisionSide(m));
 
-			int sideY = m->GetCollisionSide(player)[1] - m->GetCollisionSide(player)[0];
-			int sideX = m->GetCollisionSide(player)[3] - m->GetCollisionSide(player)[2];
+			if (player->Push())
+			{
+				int sideY = m->GetCollisionSide(player)[1] - m->GetCollisionSide(player)[0];
+				int sideX = m->GetCollisionSide(player)[3] - m->GetCollisionSide(player)[2];
 
-			m->SetHitbox({
-				m->GetPos().GetX() + sideX * 17.f,
-				m->GetPos().GetY() + sideY * 17.f }, 
-				0.f, 0.f);
+				m->SetHitbox({
+					m->GetPos().GetX() + sideX * 17.f,
+					m->GetPos().GetY() + sideY * 17.f },
+					0.f, 0.f);
+			}
 		}
 
 		Movable_Object* lastCollidingMovable = m;
 
 		for (auto& w : GetEntities<Wall>())
 		{
-			if (m->IsColliding(w) && m->GetPos().GetX() == w->GetPos().GetX() && m->GetPos().GetY() == w->GetPos().GetY())
+			if (m->IsColliding(w) && m->IsColliding(w))
 			{
 				m->SetHitbox(restPos, 0.f, 0.f);
 				break;
@@ -159,7 +169,7 @@ void StrenghtPuzzleScene::UpdateScene(Window* window)
 
 		for (auto& w : GetEntities<Movable_Object>())
 		{
-			if (m != w && m->GetPos().GetX() == w->GetPos().GetX() && m->GetPos().GetY() == w->GetPos().GetY())
+			if (m != w && m->IsColliding(w))
 			{
 				m->SetHitbox(restPos, 0.f, 0.f);
 				break;
@@ -179,13 +189,15 @@ void StrenghtPuzzleScene::UpdateScene(Window* window)
 	{
 		if (player->IsColliding(e) && e->GetType() == "Teleport" && player->IsColliding(GetEntity<ExitLevel>()))
 		{
-			std::cout << "Vous avez finit le level !\n";
+			std::cout << "\nVous avez finit le level !\n";
 			EraseAllEntities();
 			++levelIndex;
 
 			if (levelIndex >= levelPath.size())
 			{
-				std::cout << "Vous avez finit tous les levels !\n";
+				std::cout << "\n Vous avez finit tous les levels !\n";
+				std::cout << " Vous avez besoin de " << reset << " resets !\n";
+				levelIndex = 0;
 				QuitScene();
 				return;
 			}
@@ -197,7 +209,8 @@ void StrenghtPuzzleScene::UpdateScene(Window* window)
 	Input& input = Input::getInstance();
 	if (input.isKeyHeld(SDLK_BACKSPACE))
 	{
-		std::cout << "Vous avez réinitialisé le level !\n";
+		std::cout << "\nVous avez renitialiser le level !\n";
+		++reset;
 		EraseAllEntities();
 		InitScene(window);
 	}

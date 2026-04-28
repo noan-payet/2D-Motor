@@ -26,14 +26,14 @@ void StrongMan::Collision(std::vector<bool> side)
 {
 	for (int i = 0; i < 4; ++i)
 		direction[i] = side[i];
+
+	SetPos(GetPos().operator+({ (side[3] - side[2]) * 1.5f, (side[1] - side[0]) * 1.5f }));
 }
 
-void StrongMan::Push(Entity* otherEntity, std::vector<bool> side)
+bool StrongMan::Push()
 {
-	int sideY = side[0] - side[1];
-	int sideX = side[3] - side[2];
+	if (Input::getInstance().isKeyHeld(SDLK_SPACE))
+		return true;
 
-	otherEntity->SetPos({ 
-		otherEntity->GetPos().GetX() + sideX * speed * m_deltaTime,
-		otherEntity->GetPos().GetY() + sideY * speed * m_deltaTime });
+	return false;
 }
